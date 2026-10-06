@@ -3,1139 +3,1011 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>6G Eğitim | Genel Müdürlük Yönetim Portalı</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <title>6G Eğitim | Genel Müdürlük Portalı</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              navy: '#0b2545',
-              dark: '#134074',
-              blue: '#0066cc',
-              cyan: '#00b4d8',
-              teal: '#48cae4',
-              sky: '#90e0ef',
-              ice: '#eaf4f4',
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+    :root {
+      --primary-dark: #0b2545;
+      --primary-blue: #0066cc;
+      --primary-cyan: #00b4d8;
+      --accent-glow: rgba(0, 180, 216, 0.15);
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px -2px rgba(11, 37, 69, 0.08);
+      --shadow-hover: 0 12px 24px -4px rgba(0, 102, 204, 0.16);
     }
-    ::-webkit-scrollbar-track {
-      background: #f1f5f9;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #94a3b8;
-      border-radius: 9999px;
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #00b4d8;
+
+    /* Üst Header / Navigasyon */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
     }
-    .gradient-border {
-      background: linear-gradient(135deg, #00b4d8, #0066cc, #134074);
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
     }
-    .tab-active {
-      border-bottom: 2px solid #00b4d8;
-      color: #0066cc;
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon-svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .logo-text {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-text .num-g {
+      background: linear-gradient(135deg, #00b4d8 0%, #0066cc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-right: 4px;
+    }
+
+    .logo-text .egitim {
+      color: var(--primary-dark);
       font-weight: 700;
+    }
+
+    .portal-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: var(--accent-glow);
+      color: var(--primary-blue);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 180, 216, 0.3);
+    }
+
+    /* Arama Çubuğu */
+    .search-box {
+      flex: 1;
+      max-width: 460px;
+      position: relative;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 11px 16px 11px 44px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      background: #f1f5f9;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      background: #ffffff;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    /* Sağ Bilgi & Saat */
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .time-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      background: #f8fafc;
+      padding: 8px 14px;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .time-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Ana Konteyner */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 24px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* Bölüm Başlıkları */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eef2f6;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .section-title i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .title-daily i { background: #e0f2fe; color: #0284c7; }
+    .title-edu i { background: #ede9fe; color: #7c3aed; }
+    .title-news i { background: #fee2e2; color: #dc2626; }
+    .title-tools i { background: #dcfce7; color: #16a34a; }
+
+    .item-count {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    /* Grid Sistemleri */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .cards-grid-news {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    /* Kart Tasarımı */
+    .portal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: #cbd5e1;
+    }
+
+    .portal-card:hover::before {
+      background: linear-gradient(to bottom, var(--primary-cyan), var(--primary-blue));
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      background: #f8fafc;
+      transition: transform 0.2s ease;
+    }
+
+    .portal-card:hover .card-icon {
+      transform: scale(1.08);
+    }
+
+    .card-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .external-arrow {
+      font-size: 11px;
+      color: #94a3b8;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.2s ease;
+    }
+
+    .portal-card:hover .external-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--primary-blue);
+    }
+
+    /* Özel İkon Renkleri */
+    .icon-k12 { background: #e0f2fe; color: #0284c7; }
+    .icon-gmail { background: #fee2e2; color: #ea4335; }
+    .icon-drive { background: #fef3c7; color: #fbbc04; }
+    .icon-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
+    .icon-fb { background: #1877f2; color: #fff; }
+    
+    .icon-dergipark { background: #fdf2f8; color: #db2777; }
+    .icon-ttkb { background: #ede9fe; color: #6d28d9; }
+    .icon-meb { background: #fee2e2; color: #dc2626; }
+    .icon-tubitak { background: #eff6ff; color: #2563eb; }
+    .icon-tedmem { background: #f0fdf4; color: #16a34a; }
+    .icon-erg { background: #fefce8; color: #ca8a04; }
+    .icon-unesco { background: #e0f2fe; color: #0284c7; }
+    .icon-oecd { background: #f1f5f9; color: #475569; }
+    .icon-edsurge { background: #faf5ff; color: #9333ea; }
+    .icon-edutopia { background: #ecfdf5; color: #059669; }
+
+    .icon-sabah { background: #fff1f2; color: #e11d48; }
+    .icon-yenisafak { background: #eff6ff; color: #1d4ed8; }
+    .icon-hurriyet { background: #fee2e2; color: #b91c1c; }
+    .icon-aksam { background: #fef2f2; color: #ef4444; }
+    .icon-posta { background: #fff7ed; color: #ea580c; }
+    .icon-aa { background: #e0f2fe; color: #0369a1; }
+    .icon-enson { background: #fef2f2; color: #dc2626; }
+    .icon-vatan { background: #f8fafc; color: #334155; }
+    .icon-haberler { background: #fef2f2; color: #e11d48; }
+    .icon-gumushane { background: #ecfdf5; color: #047857; }
+    .icon-gazete { background: #f8fafc; color: #475569; }
+
+    /* Alt Çalışma Alanı (Hızlı Notlar & Görevler) */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .desk-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .desk-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .desk-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .desk-textarea {
+      width: 100%;
+      height: 120px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-main);
+      background: #f8fafc;
+      resize: vertical;
+      outline: none;
+      transition: border 0.2s ease;
+    }
+
+    .desk-textarea:focus {
+      border-color: var(--primary-blue);
+      background: #ffffff;
+    }
+
+    .status-msg {
+      font-size: 11px;
+      color: #10b981;
+      display: none;
+    }
+
+    /* Hızlı Görevler Listesi */
+    .todo-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .todo-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary-blue);
+      cursor: pointer;
+    }
+
+    .todo-input-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .todo-input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .todo-btn {
+      padding: 8px 14px;
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .todo-btn:hover {
+      background: #0052a3;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body>
 
-  <!-- Üst Başlık & Kurumsal Header -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        
-        <!-- Sol: 6G Eğitim Logo & Başlık -->
-        <div class="flex items-center space-x-4">
-          <div class="flex items-center gap-3">
-            <!-- 6G Eğitim İkonu (Vektörel Kitap ve Ağ Düğümleri) -->
-            <div class="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl border border-cyan-200 shadow-sm p-1.5">
-              <svg viewBox="0 0 100 100" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Sol Sayfa Çizgisi -->
-                <path d="M48 25C34 22 22 25 14 30V75C22 70 34 68 48 70V25Z" stroke="#00b4d8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Sağ Sayfa Çizgisi -->
-                <path d="M52 25C66 22 78 25 86 30V75C78 70 66 68 52 70V25Z" stroke="#0066cc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Omurga Hattı -->
-                <line x1="50" y1="26" x2="50" y2="72" stroke="#134074" stroke-width="4" stroke-linecap="round"/>
-                <!-- Ağ Düğümleri (Nodes) -->
-                <circle cx="14" cy="52" r="5" fill="#00b4d8"/>
-                <circle cx="86" cy="52" r="5" fill="#0066cc"/>
-                <circle cx="50" cy="24" r="4.5" fill="#48cae4"/>
-                <circle cx="50" cy="74" r="5" fill="#134074"/>
-              </svg>
-            </div>
-            
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-700 via-blue-800 to-brand-navy bg-clip-text text-transparent">
-                  6G Eğitim
-                </span>
-                <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-200">
-                  GM Portal
-                </span>
-              </div>
-              <p class="text-xs font-medium text-slate-500 hidden sm:block">Genel Müdürlük Yönetim ve Strateji Bilgi Sistemi</p>
-            </div>
+  <!-- Üst Bar / Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="logo-badge">
+          <!-- 6G Eğitim Kurumsal Vektör İkonu -->
+          <svg class="logo-icon-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 24V82M50 24C41 18 24 18 14 24V78C24 72 41 72 50 78M50 24C59 18 76 18 86 24V78C76 72 59 72 50 78" stroke="url(#logo_grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="14" cy="51" r="5" fill="#00b4d8"/>
+            <circle cx="86" cy="51" r="5" fill="#0066cc"/>
+            <circle cx="50" cy="80" r="5" fill="#0b2545"/>
+            <defs>
+              <linearGradient id="logo_grad" x1="14" y1="20" x2="86" y2="80" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00b4d8"/>
+                <stop offset="1" stop-color="#0066cc"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="logo-text">
+            <span class="num-g">6G</span>
+            <span class="egitim">Eğitim</span>
           </div>
         </div>
+        <span class="portal-tag">Genel Müdürlük</span>
+      </div>
 
-        <!-- Orta-Sağ: Canlı Saat, Tarih ve Hızlı Arama -->
-        <div class="flex items-center gap-3 sm:gap-6">
-          <div class="hidden md:flex flex-col text-right">
-            <span id="currentDateDisplay" class="text-xs font-medium text-slate-500">Yükleniyor...</span>
-            <span id="currentTimeDisplay" class="text-sm font-bold text-slate-800 tracking-wider">--:--:--</span>
-          </div>
+      <!-- Canlı Arama -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="liveSearch" placeholder="Portallarda veya haber sitelerinde ara..." onkeyup="filterCards()">
+      </div>
 
-          <div class="h-8 w-px bg-slate-200 hidden md:block"></div>
-
-          <!-- Gemini Durum / Ayar Butonu -->
-          <button id="btnOpenSettings" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium bg-slate-100 hover:bg-slate-200/80 text-slate-700 transition-all border border-slate-200">
-            <i data-lucide="sparkles" class="w-4 h-4 text-cyan-600"></i>
-            <span class="hidden sm:inline">AI Durumu:</span>
-            <span class="inline-flex items-center gap-1.5 font-semibold text-emerald-600">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Aktif
-            </span>
-          </button>
-
-          <!-- Bildirim & Yardım -->
-          <button onclick="showToast('Genel Müdürlük Portalı en güncel mevzuat ve akademik bağlantılarla devrededir.', 'info')" class="p-2.5 text-slate-500 hover:text-blue-700 hover:bg-blue-50 rounded-xl transition">
-            <i data-lucide="bell" class="w-5 h-5"></i>
-          </button>
+      <!-- Saat ve Durum -->
+      <div class="header-meta">
+        <div class="time-badge">
+          <span class="dot"></span>
+          <span id="currentDate">--</span>
+          <span style="opacity: 0.3;">|</span>
+          <span id="currentTime" style="font-weight: 700;">--:--</span>
         </div>
-
       </div>
     </div>
   </header>
 
-  <!-- Hızlı İdare & Mevzuat Erişim Barı (Launchpad) -->
-  <section class="bg-gradient-to-r from-brand-navy via-brand-dark to-blue-900 text-white py-2.5 px-4 shadow-inner">
-    <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto text-xs whitespace-nowrap gap-4 scrollbar-none">
-      <div class="flex items-center gap-2 text-cyan-300 font-semibold tracking-wide">
-        <i data-lucide="compass" class="w-4 h-4"></i>
-        <span>HIZLI ERİŞİM:</span>
+  <!-- Ana İçerik -->
+  <main>
+
+    <!-- 1. BÖLÜM: GÜNLÜK KULLANIMLAR -->
+    <section>
+      <div class="section-header">
+        <div class="section-title title-daily">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Günlük Kullanımlar</span>
+        </div>
+        <span class="item-count">5 Bağlantı</span>
       </div>
-      <div class="flex items-center gap-3 font-medium">
-        <a href="https://meb.gov.tr" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="external-link" class="w-3 h-3 text-cyan-300"></i> MEB Portalı
+      <div class="cards-grid">
+        <!-- K12NET -->
+        <a href="https://portal.k12net.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="k12 k12net okul yönetim öğrenci veli">
+          <div class="card-icon icon-k12"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="card-info">
+            <div class="card-title">K12NET</div>
+            <div class="card-desc">Okul Bilgi Sistemi</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
         </a>
-        <a href="https://ttkb.meb.gov.tr" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="external-link" class="w-3 h-3 text-cyan-300"></i> Talim Terbiye (TTKB)
+
+        <!-- Gmail -->
+        <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="gmail google mail posta e-posta">
+          <div class="card-icon icon-gmail"><i class="fa-solid fa-envelope"></i></div>
+          <div class="card-info">
+            <div class="card-title">Gmail</div>
+            <div class="card-desc">Kurumsal E-Posta</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
         </a>
-        <a href="https://dergipark.org.tr/tr/search?q=e%C4%9Fitim" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="book-open" class="w-3 h-3 text-cyan-300"></i> DergiPark Eğitim
+
+        <!-- Drive -->
+        <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="drive google drive bulut dosyalar arşiv">
+          <div class="card-icon icon-drive"><i class="fa-brands fa-google-drive"></i></div>
+          <div class="card-info">
+            <div class="card-title">Google Drive</div>
+            <div class="card-desc">Dosya & Arşiv Deposu</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
         </a>
-        <a href="https://resmigazete.gov.tr" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="file-text" class="w-3 h-3 text-cyan-300"></i> Resmî Gazete
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="instagram sosyal medya paylasim">
+          <div class="card-icon icon-insta"><i class="fa-brands fa-instagram"></i></div>
+          <div class="card-info">
+            <div class="card-title">Instagram</div>
+            <div class="card-desc">Kurumsal Sosyal Medya</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
         </a>
-        <a href="https://eba.gov.tr" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="monitor" class="w-3 h-3 text-cyan-300"></i> EBA
-        </a>
-        <a href="https://tedmem.org" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="pie-chart" class="w-3 h-3 text-cyan-300"></i> TEDMEM Raporları
-        </a>
-        <a href="https://www.oecd.org/education/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
-          <i data-lucide="globe" class="w-3 h-3 text-cyan-300"></i> OECD Education
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="facebook meta sosyal medya topluluk">
+          <div class="card-icon icon-fb"><i class="fa-brands fa-facebook-f"></i></div>
+          <div class="card-info">
+            <div class="card-title">Facebook</div>
+            <div class="card-desc">Topluluk & Reklam</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
         </a>
       </div>
-      <div class="hidden lg:flex items-center text-cyan-200/80 text-[11px] gap-1">
-        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cyan-400"></i> Güvenli Kurumsal Oturum
+    </section>
+
+    <!-- 2. BÖLÜM: ULUSAL BASIN VE HABER SİTELERİ -->
+    <section>
+      <div class="section-header">
+        <div class="section-title title-news">
+          <i class="fa-solid fa-newspaper"></i>
+          <span>Ulusal Basın ve Haber Siteleri</span>
+        </div>
+        <span class="item-count">11 Kaynak</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Ana Çalışma Alanı -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-      <!-- ================= SOL KOLON: YÖNETİCİ MASASI (4 Kolon) ================= -->
-      <aside class="lg:col-span-4 space-y-6">
-
-        <!-- Günlük Yönetici Ajandası ve Öncelikler -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div class="flex items-center gap-2">
-              <div class="p-2 bg-blue-50 text-blue-700 rounded-lg">
-                <i data-lucide="check-square" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <h2 class="text-sm font-bold text-slate-800">Günün Yönetimsel Öncelikleri</h2>
-                <p class="text-[11px] text-slate-400">Kişisel yapılacaklar ve takip listesi</p>
-              </div>
-            </div>
-            <span id="taskCounter" class="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">0/0</span>
+      <div class="cards-grid cards-grid-news">
+        <!-- Sabah -->
+        <a href="https://www.sabah.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="sabah gazete haber ulusal gündem">
+          <div class="card-icon icon-sabah"><i class="fa-solid fa-paper-plane"></i></div>
+          <div class="card-info">
+            <div class="card-title">Sabah</div>
+            <div class="card-desc">sabah.com.tr</div>
           </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
 
-          <!-- Görev Ekleme Kutusu -->
-          <div class="mt-3 flex gap-2">
-            <input type="text" id="newTaskInput" placeholder="Yeni görev / gündem maddesi..." class="w-full text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
-            <button id="btnAddTask" class="px-3 py-2 bg-gradient-to-r from-cyan-600 to-blue-700 text-white rounded-xl text-xs font-semibold hover:opacity-95 transition shadow-xs flex items-center justify-center">
-              <i data-lucide="plus" class="w-4 h-4"></i>
-            </button>
+        <!-- Yeni Şafak -->
+        <a href="https://www.yenisafak.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="yeni şafak yenisafak gazete haber">
+          <div class="card-icon icon-yenisafak"><i class="fa-solid fa-sun"></i></div>
+          <div class="card-info">
+            <div class="card-title">Yeni Şafak</div>
+            <div class="card-desc">yenisafak.com</div>
           </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
 
-          <!-- Görevler Listesi -->
-          <div id="taskList" class="mt-3 space-y-2 max-h-56 overflow-y-auto pr-1 text-xs">
-            <!-- Dinamik JS Görevleri -->
+        <!-- Hürriyet -->
+        <a href="https://www.hurriyet.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="hürriyet hurriyet gazete manset">
+          <div class="card-icon icon-hurriyet"><i class="fa-solid fa-h"></i></div>
+          <div class="card-info">
+            <div class="card-title">Hürriyet</div>
+            <div class="card-desc">hurriyet.com.tr</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Akşam -->
+        <a href="https://www.aksam.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="akşam aksam gazete haber">
+          <div class="card-icon icon-aksam"><i class="fa-solid fa-moon"></i></div>
+          <div class="card-info">
+            <div class="card-title">Akşam</div>
+            <div class="card-desc">aksam.com.tr</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Posta -->
+        <a href="https://www.posta.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="posta gazetesi haber">
+          <div class="card-icon icon-posta"><i class="fa-solid fa-envelope-open-text"></i></div>
+          <div class="card-info">
+            <div class="card-title">Posta</div>
+            <div class="card-desc">posta.com.tr</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Anadolu Ajansı -->
+        <a href="https://www.aa.com.tr/tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="anadolu ajansı aa resmi bülten ajans">
+          <div class="card-icon icon-aa"><i class="fa-solid fa-broadcast-tower"></i></div>
+          <div class="card-info">
+            <div class="card-title">Anadolu Ajansı</div>
+            <div class="card-desc">aa.com.tr</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Ensonhaber -->
+        <a href="https://www.ensonhaber.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="ensonhaber son dakika haber">
+          <div class="card-icon icon-enson"><i class="fa-solid fa-bolt-lightning"></i></div>
+          <div class="card-info">
+            <div class="card-title">Ensonhaber</div>
+            <div class="card-desc">ensonhaber.com</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Vatan -->
+        <a href="https://www.gazetevatan.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="vatan gazete vatan haber">
+          <div class="card-icon icon-vatan"><i class="fa-solid fa-flag"></i></div>
+          <div class="card-info">
+            <div class="card-title">Vatan</div>
+            <div class="card-desc">gazetevatan.com</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Haberler.com -->
+        <a href="https://www.haberler.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="haberler son dakika gundem">
+          <div class="card-icon icon-haberler"><i class="fa-solid fa-bullhorn"></i></div>
+          <div class="card-info">
+            <div class="card-title">Haberler.com</div>
+            <div class="card-desc">haberler.com</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Gazeteler / Manşetler -->
+        <a href="https://www.gazeteler.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="gazete gazeteler mansetler birinci sayfalar">
+          <div class="card-icon icon-gazete"><i class="fa-solid fa-sheet-plastic"></i></div>
+          <div class="card-info">
+            <div class="card-title">Gazete Manşetleri</div>
+            <div class="card-desc">Tüm Gazeteler</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Gümüşhane Haber -->
+        <a href="https://www.gumushane.gen.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="gümüşhane haber yerel gumushane olay ekspres">
+          <div class="card-icon icon-gumushane"><i class="fa-solid fa-mountain"></i></div>
+          <div class="card-info">
+            <div class="card-title">Gümüşhane Haber</div>
+            <div class="card-desc">Yerel Basın & Gündem</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. BÖLÜM: EĞİTİM & AKADEMİ KAYNAKLARI MERKEZİ -->
+    <section>
+      <div class="section-header">
+        <div class="section-title title-edu">
+          <i class="fa-solid fa-book-open-reader"></i>
+          <span>Eğitim & Akademi Kaynakları Merkezi</span>
+        </div>
+        <span class="item-count">10 Portal</span>
+      </div>
+      <div class="cards-grid">
+        <!-- DergiPark -->
+        <a href="https://dergipark.org.tr/tr/" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="dergipark akademik makale arastirma egitim dergileri">
+          <div class="card-icon icon-dergipark"><i class="fa-solid fa-scroll"></i></div>
+          <div class="card-info">
+            <div class="card-title">DergiPark</div>
+            <div class="card-desc">Akademik Eğitim Makaleleri</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- TTKB -->
+        <a href="https://ttkb.meb.gov.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="ttkb talim terbiye kurulu mufredat ders kitabi program">
+          <div class="card-icon icon-ttkb"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div class="card-info">
+            <div class="card-title">Talim ve Terbiye (TTKB)</div>
+            <div class="card-desc">Müfredat ve Kararlar</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- MEB Duyurular -->
+        <a href="https://www.meb.gov.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="meb milli egitim bakanligi resmi tebligler genelge">
+          <div class="card-icon icon-meb"><i class="fa-solid fa-landmark"></i></div>
+          <div class="card-info">
+            <div class="card-title">Milli Eğitim Bakanlığı</div>
+            <div class="card-desc">Resmi Duyuru & Tebliğler</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- TÜBİTAK -->
+        <a href="https://www.tubitak.gov.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="tubitak bilim proje arastirma bilgem">
+          <div class="card-icon icon-tubitak"><i class="fa-solid fa-atom"></i></div>
+          <div class="card-info">
+            <div class="card-title">TÜBİTAK</div>
+            <div class="card-desc">Bilim & Proje Destekleri</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- YÖK Ulusal Tez Merkezi -->
+        <a href="https://tez.yok.gov.tr/UlusalTezMerkezi/" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="yoktez yok tez ulusal tez merkezi akademik arastirma yuksek lisans doktora">
+          <div class="card-icon" style="background: #eff6ff; color: #1d4ed8;"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="card-info">
+             <div class="card-title">YÖK Tez Merkezi</div>
+             <div class="card-desc">Ulusal Tez & Araştırma Taraması</div>
+         </div>
+         <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+         </a>
+
+        <!-- TEDMEM -->
+        <a href="https://tedmem.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="tedmem egitim analiz rapor ted politika">
+          <div class="card-icon icon-tedmem"><i class="fa-solid fa-chart-pie"></i></div>
+          <div class="card-info">
+            <div class="card-title">TEDMEM</div>
+            <div class="card-desc">Eğitim Raporları & Analiz</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- ERG -->
+        <a href="https://www.egitimreformugirisimi.org" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="erg egitim reformu girisimi izleme politika">
+          <div class="card-icon icon-erg"><i class="fa-solid fa-compass-drafting"></i></div>
+          <div class="card-info">
+            <div class="card-title">Eğitim Reformu Girişimi</div>
+            <div class="card-desc">ERG Politika Notları</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- UNESCO -->
+        <a href="https://www.unesco.org/en/education" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="unesco kuresel uluslararasi global egitim politikasi">
+          <div class="card-icon icon-unesco"><i class="fa-solid fa-globe"></i></div>
+          <div class="card-info">
+            <div class="card-title">UNESCO Education</div>
+            <div class="card-desc">Küresel Eğitim Raporları</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- OECD -->
+        <a href="https://www.oecd.org/education" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="oecd pisa egitim verileri karsilastirmali">
+          <div class="card-icon icon-oecd"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="card-info">
+            <div class="card-title">OECD & PISA</div>
+            <div class="card-desc">Uluslararası Eğitim Verileri</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- EdSurge -->
+        <a href="https://www.edsurge.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="edsurge egitim teknolojileri edtech yapay zeka">
+          <div class="card-icon icon-edsurge"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="card-info">
+            <div class="card-title">EdSurge</div>
+            <div class="card-desc">Eğitim Teknolojileri (EdTech)</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+
+        <!-- Edutopia -->
+        <a href="https://www.edutopia.org" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="edutopia ogretim metodlari sinif yonetimi pedagoji">
+          <div class="card-icon icon-edutopia"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="card-info">
+            <div class="card-title">Edutopia</div>
+            <div class="card-desc">Yenilikçi Öğretim Stratejileri</div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. BÖLÜM: YÖNETİCİ ÇALIŞMA MASASI (HIZLI NOT & GÖREVLER) -->
+    <section class="workspace-grid">
+      <!-- Yerel Not Defteri -->
+      <div class="desk-card">
+        <div class="desk-header">
+          <div class="desk-title">
+            <i class="fa-regular fa-pen-to-square" style="color: var(--primary-blue);"></i>
+            <span>Masa Notları (Otomatik Kaydedilir)</span>
+          </div>
+          <span class="status-msg" id="saveStatus"><i class="fa-solid fa-check"></i> Kaydedildi</span>
+        </div>
+        <textarea class="desk-textarea" id="directorNotes" placeholder="Günlük hızlı notlarınızı, telefon numaralarını veya hatırlatmaları buraya yazabilirsiniz..." oninput="saveNotes()"></textarea>
+      </div>
+
+      <!-- Günlük Görevler / Checklist -->
+      <div class="desk-card">
+        <div class="desk-header">
+          <div class="desk-title">
+            <i class="fa-solid fa-list-check" style="color: #10b981;"></i>
+            <span>Günün Öncelikli Görevleri</span>
           </div>
         </div>
-
-        <!-- Hızlı Yönetici Notları (LocalStorage Entegreli) -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 flex flex-col">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div class="flex items-center gap-2">
-              <div class="p-2 bg-amber-50 text-amber-700 rounded-lg">
-                <i data-lucide="file-edit" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <h2 class="text-sm font-bold text-slate-800">Genel Müdürlük Not Defteri</h2>
-                <p class="text-[11px] text-slate-400">Toplantı notları & fikirler (Otomatik kaydedilir)</p>
-              </div>
-            </div>
-            <button id="btnCopyNotes" title="Panoya Kopyala" class="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition">
-              <i data-lucide="copy" class="w-4 h-4"></i>
-            </button>
-          </div>
-
-          <textarea id="executiveNotes" rows="7" placeholder="Görüşme notları, toplantı kararları, incelenecek mevzuat maddeleri..." class="mt-3 w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none leading-relaxed bg-slate-50/50"></textarea>
-
-          <div class="mt-3 flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-100">
-            <span id="noteSaveStatus">Değişiklikler tarayıcıda güvende</span>
-            <button id="btnClearNotes" class="text-red-500 hover:underline">Temizle</button>
-          </div>
+        <ul class="todo-list" id="todoList"></ul>
+        <div class="todo-input-row">
+          <input type="text" class="todo-input" id="newTodoInput" placeholder="Yeni görev ekle..." onkeypress="handleTodoKey(event)">
+          <button class="todo-btn" onclick="addTodo()">Ekle</button>
         </div>
-
-        <!-- Yönetici Kısayol Widget'ı: Resmi Gazete & Mevzuat Takip -->
-        <div class="rounded-2xl bg-gradient-to-br from-slate-900 to-brand-navy text-white p-5 shadow-sm">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <i data-lucide="scale" class="w-4 h-4 text-cyan-400"></i>
-              <span class="text-xs font-bold uppercase tracking-wider text-cyan-300">MEB Mevzuat Tarayıcı</span>
-            </div>
-            <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Mevzuat.gov.tr</span>
-          </div>
-          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-            Eğitim kurumu yönergeleri, haftalık ders çizelgeleri ve tebliğler dergisi güncellemelerini anında sorgulayın.
-          </p>
-          <div class="mt-3 flex gap-2">
-            <input type="text" id="mebSearchQuery" placeholder="Yönetmelik, genelge veya terim..." class="w-full text-xs px-3 py-2 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-hidden focus:ring-1 focus:ring-cyan-400">
-            <button onclick="searchMebLegislation()" class="px-3 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl text-xs transition">
-              Ara
-            </button>
-          </div>
-        </div>
-
-      </aside>
-
-      <!-- ================= SAĞ KOLON: KÜRESEL ÇEVİRİ & AKADEMİK KAYNAK MERKEZİ (8 Kolon) ================= -->
-      <section class="lg:col-span-8 space-y-6">
-
-        <!-- 1. MODÜL: İLERİ DÜZEY KÜRESEL EĞİTİM ÇEVİRİ & YÖNETİCİ ÖZET MOTORU (GEMINI 3 FLASH) -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-          
-          <div class="p-5 bg-gradient-to-r from-blue-900 via-brand-dark to-brand-navy text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="flex items-start gap-3">
-              <div class="p-2.5 bg-cyan-500/20 text-cyan-300 rounded-xl border border-cyan-400/30">
-                <i data-lucide="cpu" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <h2 class="text-base font-bold text-white tracking-wide">
-                    Küresel Eğitim Çeviri & Yönetici Özet Motoru
-                  </h2>
-                  <span class="text-[10px] bg-cyan-400/20 text-cyan-200 border border-cyan-300/30 font-semibold px-2 py-0.5 rounded-full">
-                    Gemini 3 Flash
-                  </span>
-                </div>
-                <p class="text-xs text-slate-300 mt-0.5">
-                  İngilizce eğitim bültenleri, EdSurge, UNESCO ve OECD raporlarını pedagojik jargona sadık kalarak Türkçeleştirin.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-5 space-y-4">
-
-            <!-- Mod Seçiciler: Genel Müdürlük İhtiyaçlarına Göre 3 Farklı Çıktı -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <label class="cursor-pointer border border-slate-200 rounded-xl p-3 flex flex-col justify-between hover:border-cyan-400 transition bg-slate-50/50 has-checked:border-cyan-600 has-checked:bg-cyan-50/30">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-slate-800">1. Pedagojik Çeviri</span>
-                  <input type="radio" name="translationMode" value="pedagojik" checked class="text-cyan-600 focus:ring-cyan-500">
-                </div>
-                <p class="text-[11px] text-slate-500 mt-1">Eğitim terminolojisine ve akademik üsluba tam uyumlu Türkçe çeviri.</p>
-              </label>
-
-              <label class="cursor-pointer border border-slate-200 rounded-xl p-3 flex flex-col justify-between hover:border-cyan-400 transition bg-slate-50/50 has-checked:border-cyan-600 has-checked:bg-cyan-50/30">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-slate-800">2. GM Yönetici Özeti</span>
-                  <input type="radio" name="translationMode" value="executive" class="text-cyan-600 focus:ring-cyan-500">
-                </div>
-                <p class="text-[11px] text-slate-500 mt-1">3 kritik çıkarım, riskler ve okullarımız için stratejik aksiyon planı.</p>
-              </label>
-
-              <label class="cursor-pointer border border-slate-200 rounded-xl p-3 flex flex-col justify-between hover:border-cyan-400 transition bg-slate-50/50 has-checked:border-cyan-600 has-checked:bg-cyan-50/30">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-slate-800">3. EdTech & Metodoloji</span>
-                  <input type="radio" name="translationMode" value="edtech" class="text-cyan-600 focus:ring-cyan-500">
-                </div>
-                <p class="text-[11px] text-slate-500 mt-1">Kullanılan araçlar, ölçme-değerlendirme yöntemleri ve sınıf içi pratikler.</p>
-              </label>
-            </div>
-
-            <!-- Metin Giriş Alanı -->
-            <div>
-              <div class="flex items-center justify-between mb-1.5">
-                <label for="aiSourceText" class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-                  <i data-lucide="file-input" class="w-3.5 h-3.5 text-blue-600"></i>
-                  Yabancı Metin, Makale Özeti veya Haber İçeriği:
-                </label>
-                <div class="flex items-center gap-2">
-                  <button type="button" onclick="loadSampleText(1)" class="text-[11px] text-blue-700 hover:underline">Örnek 1 (AI & Sınıf)</button>
-                  <span class="text-slate-300">|</span>
-                  <button type="button" onclick="loadSampleText(2)" class="text-[11px] text-blue-700 hover:underline">Örnek 2 (OECD Raporu)</button>
-                  <span class="text-slate-300">|</span>
-                  <button type="button" onclick="document.getElementById('aiSourceText').value=''" class="text-[11px] text-slate-400 hover:text-red-500">Temizle</button>
-                </div>
-              </div>
-
-              <textarea id="aiSourceText" rows="5" placeholder="İngilizce veya yabancı dildeki eğitim makalesini, UNESCO duyurusunu ya da akademik özeti buraya yapıştırın..." class="w-full text-xs p-3.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent leading-relaxed font-mono bg-slate-50/40"></textarea>
-            </div>
-
-            <!-- Eylem Butonları -->
-            <div class="flex items-center justify-between pt-1">
-              <span class="text-[11px] text-slate-400 flex items-center gap-1">
-                <i data-lucide="shield" class="w-3.5 h-3.5 text-emerald-500"></i> Genel Müdürlük düzeyinde kurumsal prompt optimizasyonu
-              </span>
-              <button id="btnProcessAI" class="px-5 py-2.5 bg-gradient-to-r from-blue-700 via-blue-800 to-brand-navy hover:from-blue-800 hover:to-slate-900 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2">
-                <i data-lucide="sparkles" class="w-4 h-4 text-cyan-300"></i>
-                <span id="btnAIText">İşle & Türkçeleştir</span>
-              </button>
-            </div>
-
-            <!-- Çıktı / Yanıt Alanı (Varsayılan olarak gizli) -->
-            <div id="aiOutputContainer" class="hidden mt-4 pt-4 border-t border-slate-200">
-              <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3">
-                  <div class="flex items-center gap-2">
-                    <span id="aiResultBadge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-100 text-blue-800">
-                      Sonuç
-                    </span>
-                    <span class="text-xs font-bold text-slate-700">Analiz & Rapor Çıktısı</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <button id="btnTransferToNotes" class="px-2.5 py-1 text-xs font-medium text-blue-700 hover:bg-blue-100 rounded-lg transition flex items-center gap-1">
-                      <i data-lucide="clipboard-pen" class="w-3.5 h-3.5"></i> Notlarıma Aktar
-                    </button>
-                    <button id="btnCopyAIOutput" class="px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-slate-200 rounded-lg transition flex items-center gap-1">
-                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Kopyala
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Yükleniyor Göstergesi -->
-                <div id="aiLoadingSpinner" class="hidden py-8 text-center space-y-3">
-                  <div class="inline-block w-7 h-7 border-3 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p class="text-xs font-medium text-slate-600">Gemini pedagojik terminolojiye uyarlayarak analizi hazırlıyor...</p>
-                </div>
-
-                <!-- Metin İçeriği -->
-                <div id="aiOutputText" class="text-xs text-slate-800 leading-relaxed space-y-2 whitespace-pre-wrap font-sans">
-                  <!-- AI Yanıtı Buraya Gelecek -->
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 2. MODÜL: EĞİTİM & AKADEMİ KAYNAKLARI MERKEZİ (Dergipark, EdSurge, UNESCO vs.) -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5">
-          
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
-            <div>
-              <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
-                <i data-lucide="library" class="w-5 h-5 text-blue-700"></i>
-                Eğitim & Akademi Kaynakları Merkezi
-              </h2>
-              <p class="text-xs text-slate-500">Mevzuat, hakemli dergiler, küresel bültenler ve politika merkezleri</p>
-            </div>
-
-            <!-- Kaynak Kategori Filtresi -->
-            <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs overflow-x-auto">
-              <button class="filter-btn px-3 py-1.5 rounded-lg font-semibold bg-white text-blue-800 shadow-xs" data-category="all">Tümü</button>
-              <button class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900" data-category="yerli">Yerli / Akademik</button>
-              <button class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900" data-category="kuresel">Küresel / EdTech</button>
-              <button class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900" data-category="politika">Politika & Rapor</button>
-            </div>
-          </div>
-
-          <!-- Arama Filtreleme Çubuğu -->
-          <div class="mt-4 mb-4 relative">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
-            <input type="text" id="portalSearchInput" placeholder="Kaynak veya bülten ara (DergiPark, UNESCO, OECD, ERG, EdSurge...)" class="w-full text-xs pl-9 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
-          </div>
-
-          <!-- Portallar Kart Grid'i -->
-          <div id="portalsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            <!-- Dinamik Olarak JS ile Doldurulacak -->
-          </div>
-
-        </div>
-
-        <!-- 3. MODÜL: GÜNCEL KÜRESEL EĞİTİM AKIŞI (Hazır İnceleme & Tek Tıkla Özetleme) -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-ping"></span>
-              <h2 class="text-sm font-bold text-slate-800">Küresel Eğitim Gündeminden Seçmeler</h2>
-            </div>
-            <span class="text-xs text-slate-400 font-medium">Doğrudan Çeviri Motoruna Gönder</span>
-          </div>
-
-          <div class="mt-4 space-y-3" id="globalBriefsList">
-            <!-- Canlı Seçmeler JS ile render edilir -->
-          </div>
-        </div>
-
-      </section>
-
-    </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- Ayarlar Modal (API Key Değiştirme veya Manuel Giriş) -->
-  <div id="settingsModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center hidden p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-          <i data-lucide="sliders" class="w-4 h-4 text-cyan-600"></i>
-          Sistem & AI Ayarları
-        </h3>
-        <button id="btnCloseSettings" class="text-slate-400 hover:text-slate-600">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-      <div class="mt-4 space-y-3 text-xs text-slate-600">
-        <p>Genel Müdürlük Portalı hazır Gemini entegrasyonuyla çalışır. Kendi kurumsal Gemini API anahtarınızı tanımlamak isterseniz aşağıdan güncelleyebilirsiniz:</p>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Özel Gemini API Key (İsteğe Bağlı):</label>
-          <input type="password" id="customApiKeyInput" placeholder="Varsayılan anahtar etkin (Boş bırakabilirsiniz)" class="w-full text-xs p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500">
-        </div>
-        <p class="text-[11px] text-slate-400 italic">Anahtarınız yalnızca tarayıcınızın yerel depolama alanında (localStorage) saklanır, hiçbir sunucuya iletilmez.</p>
-      </div>
-      <div class="mt-6 flex justify-end gap-2">
-        <button id="btnSaveSettings" class="px-4 py-2 bg-blue-700 text-white rounded-xl text-xs font-semibold hover:bg-blue-800 transition">Kaydet & Kapat</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Bildirimi -->
-  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-xs transform transition-all duration-300 translate-y-16 opacity-0 pointer-events-none">
-    <i id="toastIcon" data-lucide="info" class="w-4 h-4 text-cyan-400"></i>
-    <span id="toastMessage">İşlem yapıldı</span>
-  </div>
-
-  <!-- Alt Bilgi (Footer) -->
-  <footer class="mt-12 bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-slate-700">6G Eğitim</span>
-        <span>•</span>
-        <span>Genel Müdürlük Yönetim Portalı</span>
-      </div>
-      <div>
-        <span>GitHub Pages Uyumlu • Kurumsal Bilgi ve Çeviri Altyapısı</span>
-      </div>
-    </div>
+  <!-- Alt Bilgi -->
+  <footer>
+    <p>6G Eğitim Genel Müdürlüğü © 2026 | Kurumsal Yönetim & İletişim Portalı</p>
   </footer>
 
   <script>
-    /* ==========================================================================
-       6G EĞİTİM PORTALI - TEMEL VERİLER VE YÖNETİM SİSTEMİ
-       ========================================================================== */
-
-    // 1. Kurumsal Portallar Veri Tabanı
-    const PORTALS_DATA = [
-      {
-        id: 'dergipark',
-        title: 'DergiPark Akademik',
-        category: 'yerli',
-        badge: 'Hakemli Dergiler',
-        url: 'https://dergipark.org.tr/tr/search?q=e%C4%9Fitim',
-        desc: 'Türkiye merkezli eğitim araştırmaları, pedagoji makaleleri ve akademik yayın arşivi.',
-        icon: 'book-open',
-        tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
-      },
-      {
-        id: 'ttkb',
-        title: 'Talim ve Terbiye Kurulu',
-        category: 'politika',
-        badge: 'Mevzuat & Program',
-        url: 'https://ttkb.meb.gov.tr',
-        desc: 'Öğretim programları, ders kitapları onayları ve kurul kararları arşivi.',
-        icon: 'landmark',
-        tagColor: 'bg-blue-50 text-blue-700 border-blue-200'
-      },
-      {
-        id: 'meb_basin',
-        title: 'MEB Basın & Duyurular',
-        category: 'yerli',
-        badge: 'Resmi Bildiriler',
-        url: 'https://meb.gov.tr/basin-ve-halkla-iliskiler-musavirligi/haberler/kategori/1',
-        desc: 'Bakanlık güncel genelgeleri, protokolleri ve resmi basın açıklamaları.',
-        icon: 'megaphone',
-        tagColor: 'bg-red-50 text-red-700 border-red-200'
-      },
-      {
-        id: 'edsurge',
-        title: 'EdSurge Global',
-        category: 'kuresel',
-        badge: 'EdTech & İnovasyon',
-        url: 'https://www.edsurge.com',
-        desc: 'Küresel eğitim teknolojileri, yapay zeka entegrasyonları ve okul trendleri.',
-        icon: 'laptop',
-        tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-200'
-      },
-      {
-        id: 'oecd',
-        title: 'OECD Education & Skills',
-        category: 'politika',
-        badge: 'PISA & İstatistik',
-        url: 'https://www.oecd.org/education/',
-        desc: 'PISA raporları, küresel öğretmen ve öğrenci beceri analizleri, veri setleri.',
-        icon: 'bar-chart-2',
-        tagColor: 'bg-cyan-50 text-cyan-700 border-cyan-200'
-      },
-      {
-        id: 'unesco',
-        title: 'UNESCO Education',
-        category: 'kuresel',
-        badge: 'Küresel Politika',
-        url: 'https://www.unesco.org/en/education',
-        desc: 'Geleceğin eğitim standartları, dijital kapsayıcılık ve eğitim liderliği belgeleri.',
-        icon: 'globe-2',
-        tagColor: 'bg-amber-50 text-amber-700 border-amber-200'
-      },
-      {
-        id: 'edutopia',
-        title: 'Edutopia (Lucas Foundation)',
-        category: 'kuresel',
-        badge: 'Öğretim Stratejileri',
-        url: 'https://www.edutopia.org',
-        desc: 'Sınıf içi kanıta dayalı öğretim teknikleri, sosyal-duygusal öğrenme pratikleri.',
-        icon: 'lightbulb',
-        tagColor: 'bg-violet-50 text-violet-700 border-violet-200'
-      },
-      {
-        id: 'erg',
-        title: 'Eğitim Reformu Girişimi (ERG)',
-        category: 'politika',
-        badge: 'İzleme Raporları',
-        url: 'https://www.egitimreformugirisimi.org',
-        desc: 'Türkiye eğitim sistemi izleme raporları, öğretmen politikaları ve eşitlik analizleri.',
-        icon: 'file-check-2',
-        tagColor: 'bg-teal-50 text-teal-700 border-teal-200'
-      },
-      {
-        id: 'tedmem',
-        title: 'TEDMEM Düşünce Kuruluşu',
-        category: 'yerli',
-        badge: 'Analiz & Görüş',
-        url: 'https://tedmem.org',
-        desc: 'Eğitim sistemine dair derinlemesine politika notları, yıllık eğitim değerlendirmeleri.',
-        icon: 'layers',
-        tagColor: 'bg-orange-50 text-orange-700 border-orange-200'
-      },
-      {
-        id: 'tubitak',
-        title: 'TÜBİTAK Bilim & Teknik',
-        category: 'yerli',
-        badge: 'Bilim & STEM',
-        url: 'https://populerbilim.tubitak.gov.tr',
-        desc: 'Öğrenci ve öğretmen STEM projeleri, bilimsel okuryazarlık ve yayınlar.',
-        icon: 'atom',
-        tagColor: 'bg-blue-50 text-blue-700 border-blue-200'
-      }
-    ];
-
-    // 2. Canlı Küresel Özetler (Doğrudan Çeviriye Aktarılabilir)
-    const GLOBAL_BRIEFS = [
-      {
-        source: 'OECD Education Working Papers',
-        title: 'Artificial Intelligence and Teacher Agency: Complementing Classroom Pedagogy',
-        date: 'Bugün',
-        text: 'This policy review investigates how generative AI models affect the diagnostic decision-making of K-12 teachers. While algorithmic feedback automates formative assessment scoring, research indicates that teachers who maintain deliberate cognitive agency in lesson planning foster higher metacognitive reflection among students. Key recommendations include mandatory ethical literacy modules for school administrators and developing balanced assessment frameworks that prevent over-reliance on synthetic outputs.',
-      },
-      {
-        source: 'UNESCO Policy Brief',
-        title: 'Digital Inclusion and Screen-Time Guidelines in Primary Education Systems',
-        date: 'Bu Hafta',
-        text: 'The latest UNESCO global report emphasizes strict regulatory boundaries for digital interfaces in early childhood and primary schools. Evidence underscores that screen-free peer collaboration enhances executive function and peer-to-peer linguistic resilience. School districts are advised to maintain hybrid learning models with tactile textbooks, limiting purely digital instruction to pedagogical tasks requiring computational simulation.',
-      },
-      {
-        source: 'EdSurge Leadership',
-        title: 'Executive Frameworks for Sustainable EdTech Procurement and ROI Measurement',
-        date: 'Son Sayı',
-        text: 'School management boards frequently invest in software licenses that suffer from less than 30% active learner utilization after the first quarter. This framework outlines the 4-phase institutional evaluation: pedagogical gap analysis, interoperability with existing LMS architectures, teacher professional training commitments, and longitudinal learning outcome metrics rather than vanity engagement rates.',
-      }
-    ];
-
-    // Örnek Metinler
-    const SAMPLE_TEXTS = {
-      1: "Recent studies in K-12 cognitive development highlight the efficacy of micro-scaffolding in blended classrooms. When teachers decompose complex algebraic reasoning into three-minute reflective checkpoints, students demonstrate a 24% increase in problem-solving retention. Crucially, the integration of adaptive AI tutors was only statistically beneficial when paired with immediate peer-dialogue protocols, confirming that technology accelerates learning solely when embedded within strong social constructivist pedagogy.",
-      2: "The OECD 2026 Education Policy Outlook underscores three pivotal imperatives for school leadership: First, the mitigation of chronic teacher attrition through distributed leadership models that delegate curricular autonomy. Second, the restructuring of school operational budgets to support climate-resilient learning campuses. Third, the modernization of secondary school vocational pathways to reflect localized industry demands in clean energy and advanced data governance."
-    };
-
-    // LocalStorage Anahtarları
-    const STORAGE_KEY_TASKS = '6g_portal_tasks_v1';
-    const STORAGE_KEY_NOTES = '6g_portal_notes_v1';
-    const STORAGE_KEY_APIKEY = '6g_portal_custom_key_v1';
-
-    // Sayfa Yüklendiğinde
-    window.addEventListener('DOMContentLoaded', () => {
-      initClock();
-      renderPortals(PORTALS_DATA);
-      renderGlobalBriefs();
-      loadTasks();
-      loadNotes();
-      setupEventListeners();
-      lucide.createIcons();
-    });
-
-    // Saat ve Tarih Güncelleyici
-    function initClock() {
-      const dateEl = document.getElementById('currentDateDisplay');
-      const timeEl = document.getElementById('currentTimeDisplay');
-
-      function update() {
-        const now = new Date();
-        const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        dateEl.textContent = now.toLocaleDateString('tr-TR', optionsDate);
-        timeEl.textContent = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      }
-      update();
-      setInterval(update, 1000);
-    }
-
-    // Portalları Render Et
-    function renderPortals(list) {
-      const container = document.getElementById('portalsGrid');
-      container.innerHTML = '';
-
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-2 text-center py-8 text-slate-400 text-xs">
-            Arama kriterine uygun eğitim kaynağı bulunamadı.
-          </div>
-        `;
-        return;
-      }
-
-      list.forEach(item => {
-        const card = document.createElement('div');
-        card.className = "p-4 rounded-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-md transition-all bg-white flex flex-col justify-between group";
-        card.innerHTML = `
-          <div>
-            <div class="flex items-start justify-between gap-2">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border ${item.tagColor}">
-                ${item.badge}
-              </span>
-              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 group-hover:text-blue-600 transition">
-                <i data-lucide="external-link" class="w-4 h-4"></i>
-              </a>
-            </div>
-            <h3 class="text-xs font-bold text-slate-800 mt-2 group-hover:text-blue-700 transition">
-              ${item.title}
-            </h3>
-            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed line-clamp-2">
-              ${item.desc}
-            </p>
-          </div>
-          <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-[10px] text-slate-400 capitalize">${item.category === 'yerli' ? 'Ulusal Akademi' : item.category === 'kuresel' ? 'Küresel EdTech' : 'Strateji & Mevzuat'}</span>
-            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1">
-              Portala Git <i data-lucide="chevron-right" class="w-3 h-3"></i>
-            </a>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-      lucide.createIcons();
-    }
-
-    // Küresel Bültenleri Render Et
-    function renderGlobalBriefs() {
-      const container = document.getElementById('globalBriefsList');
-      container.innerHTML = '';
-
-      GLOBAL_BRIEFS.forEach((brief, idx) => {
-        const item = document.createElement('div');
-        item.className = "p-3.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-slate-50/60 transition";
-        item.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold text-blue-700 uppercase tracking-wider">${brief.source}</span>
-            <span class="text-[10px] text-slate-400">${brief.date}</span>
-          </div>
-          <h4 class="text-xs font-bold text-slate-800 mt-1">${brief.title}</h4>
-          <p class="text-[11px] text-slate-600 mt-1 leading-relaxed line-clamp-2 font-mono">${brief.text}</p>
-          <div class="mt-2.5 flex items-center justify-end gap-2">
-            <button onclick="injectTextToAI(${idx})" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 transition flex items-center gap-1.5">
-              <i data-lucide="sparkles" class="w-3 h-3 text-cyan-600"></i>
-              Motorla Çevir ve Özetle
-            </button>
-          </div>
-        `;
-        container.appendChild(item);
-      });
-      lucide.createIcons();
-    }
-
-    // Bülten metnini AI motoruna aktar ve otomatik başlat
-    window.injectTextToAI = function(index) {
-      const brief = GLOBAL_BRIEFS[index];
-      if (!brief) return;
-      const input = document.getElementById('aiSourceText');
-      input.value = `[${brief.source}] ${brief.title}\n\n${brief.text}`;
+    // Canlı Saat & Tarih
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+      document.getElementById('currentDate').textContent = now.toLocaleDateString('tr-TR', options);
       
-      // Sayfayı AI alanına odakla
-      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      input.focus();
-      showToast('Metin yapay zeka motoruna yüklendi.', 'info');
-    };
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // Örnek Metin Yükleyici
-    window.loadSampleText = function(key) {
-      if (SAMPLE_TEXTS[key]) {
-        document.getElementById('aiSourceText').value = SAMPLE_TEXTS[key];
-        showToast(`Örnek ${key} yüklendi.`, 'info');
-      }
-    };
+    // Kartlar Üzerinde Canlı Arama / Filtreleme
+    function filterCards() {
+      const query = document.getElementById('liveSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.portal-card');
 
-    // ==========================================================================
-    // GEMINI 3 FLASH - EĞİTİM & PEDAGOJİK ÇEVİRİ MOTORU
-    // ==========================================================================
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
 
-    async function processWithGemini() {
-      const sourceText = document.getElementById('aiSourceText').value.trim();
-      if (!sourceText) {
-        showToast('Lütfen önce çevrilecek veya özetlenecek bir yabancı metin yapıştırın.', 'warning');
-        return;
-      }
-
-      const mode = document.querySelector('input[name="translationMode"]:checked').value;
-      const customKey = localStorage.getItem(STORAGE_KEY_APIKEY) || '';
-      const apiKey = customKey; // Canvas çalışma ortamında otomatik sağlanır veya özel anahtar kullanılır
-
-      const outputContainer = document.getElementById('aiOutputContainer');
-      const outputText = document.getElementById('aiOutputText');
-      const loadingSpinner = document.getElementById('aiLoadingSpinner');
-      const badge = document.getElementById('aiResultBadge');
-      const btn = document.getElementById('btnProcessAI');
-      const btnText = document.getElementById('btnAIText');
-
-      // Arayüzü Yükleniyor durumuna geçir
-      outputContainer.classList.remove('hidden');
-      loadingSpinner.classList.remove('hidden');
-      outputText.innerHTML = '';
-      btn.disabled = true;
-      btn.classList.add('opacity-75');
-      btnText.textContent = 'Analiz Ediliyor...';
-
-      // Mod Rozeti
-      if (mode === 'pedagojik') {
-        badge.textContent = 'Pedagojik & Akademik Çeviri';
-        badge.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-100 text-blue-800';
-      } else if (mode === 'executive') {
-        badge.textContent = 'Genel Müdürlük Yönetici Özeti';
-        badge.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800';
-      } else {
-        badge.textContent = 'EdTech & Metodoloji Analizi';
-        badge.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-purple-100 text-purple-800';
-      }
-
-      // Sistem Yönergesi & İstem Yapılandırması
-      let systemPrompt = "Sen '6G Eğitim' kurumunun Genel Müdürlük Eğitim Yönetim ve Pedagoji Danışmanısın. Küresel eğitim yayınlarını, OECD ve UNESCO raporlarını Türk eğitim sistemine ve pedagojik jargona kusursuz şekilde uyarlayarak analiz edersin.";
-
-      let userPrompt = "";
-
-      if (mode === 'pedagojik') {
-        userPrompt = `Aşağıdaki yabancı dildeki eğitim metnini, Türk Milli Eğitimi ve akademik pedagoji literatüründeki kavramlara (örn: biçimlendirici değerlendirme, yapılandırmacı yaklaşım, üstbiliş, öğretimsel liderlik vb.) tam sadık kalarak, son derece akıcı, profesyonel ve resmi bir Türkçeye çevir:\n\nMETİN:\n${sourceText}`;
-      } else if (mode === 'executive') {
-        userPrompt = `Aşağıdaki yabancı eğitim metnini bir Genel Müdür/Yönetici brifingi formatında analiz et. Şu net başlıkları kullan:
-1. YÖNETİCİ ÖZETİ (Tek paragrafta ana fikir)
-2. 3 KRİTİK ÇIKARIM (Maddeler halinde somut bulgular)
-3. TÜRKİYE VE KURUMLARIMIZ İÇİN EYLEM ÖNERİLERİ (Okullarımızda veya genel müdürlükte atılabilecek pratik adımlar)
-
-METİN:\n${sourceText}`;
-      } else {
-        userPrompt = `Aşağıdaki eğitim makalesini 'Eğitim Teknolojisi ve Öğretim Metodolojisi' merceğinden incele:
-- Öne çıkan dijital araçlar veya yapay zeka modelleri
-- Ölçme ve değerlendirmeye etkisi
-- Öğretmen ve öğrenci rollerindeki değişim
-- Olası riskler veya aşırı teknoloji bağımlılığı uyarıları
-
-METİN:\n${sourceText}`;
-      }
-
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-      const payload = {
-        contents: [
-          {
-            parts: [{ text: userPrompt }]
-          }
-        ],
-        systemInstruction: {
-          parts: [{ text: systemPrompt }]
-        }
-      };
-
-      try {
-        let attempts = 0;
-        let success = false;
-        let resultData = null;
-
-        while (attempts < 3 && !success) {
-          try {
-            const response = await fetch(apiUrl, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-              throw new Error(`HTTP Hata Kodu: ${response.status}`);
-            }
-
-            resultData = await response.json();
-            success = true;
-          } catch (err) {
-            attempts++;
-            if (attempts >= 3) throw err;
-            await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempts)));
-          }
-        }
-
-        const candidate = resultData?.candidates?.[0];
-        const generatedText = candidate?.content?.parts?.[0]?.text;
-
-        if (generatedText) {
-          outputText.textContent = generatedText;
-          showToast('Analiz ve Türkçeleştirme başarıyla tamamlandı.', 'success');
+        if (title.includes(query) || desc.includes(query) || tags.includes(query)) {
+          card.style.display = 'flex';
         } else {
-          outputText.textContent = 'Modelden geçerli bir metin yanıtı alınamadı.';
-          showToast('Model içeriği boş döndü.', 'warning');
+          card.style.display = 'none';
         }
-
-      } catch (error) {
-        console.error('Gemini API Hatası:', error);
-        outputText.innerHTML = `
-          <div class="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs">
-            <strong>Analiz sırasında bağlantı hatası oluştu:</strong> ${error.message || 'Bilinmeyen hata'}.<br>
-            Lütfen internet bağlantınızı veya Ayarlar menüsünden API Anahtarınızı kontrol ediniz.
-          </div>
-        `;
-        showToast('Analiz başarısız oldu.', 'error');
-      } finally {
-        loadingSpinner.classList.add('hidden');
-        btn.disabled = false;
-        btn.classList.remove('opacity-75');
-        btnText.textContent = 'İşle & Türkçeleştir';
-      }
-    }
-
-    // ==========================================================================
-    // YÖNETİCİ GÖREVLERİ & NOT DEFTERİ (LocalStorage)
-    // ==========================================================================
-
-    let tasks = [];
-
-    function loadTasks() {
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY_TASKS);
-        if (stored) {
-          tasks = JSON.parse(stored);
-        } else {
-          // Varsayılan ilk kurulum görevleri
-          tasks = [
-            { id: 1, text: 'Haftalık Talim Terbiye Tebliğler Dergisi taraması', done: false },
-            { id: 2, text: 'UNESCO dijital ekran süresi tavsiyelerinin incelenmesi', done: true },
-            { id: 3, text: 'DergiPark en son eğitim yönetimi makaleleri özeti', done: false }
-          ];
-          saveTasks();
-        }
-      } catch (e) {
-        tasks = [];
-      }
-      renderTasks();
-    }
-
-    function saveTasks() {
-      localStorage.setItem(STORAGE_KEY_TASKS, JSON.stringify(tasks));
-      renderTasks();
-    }
-
-    function renderTasks() {
-      const listEl = document.getElementById('taskList');
-      const counterEl = document.getElementById('taskCounter');
-      listEl.innerHTML = '';
-
-      const completed = tasks.filter(t => t.done).length;
-      counterEl.textContent = `${completed}/${tasks.length}`;
-
-      if (tasks.length === 0) {
-        listEl.innerHTML = '<p class="text-slate-400 italic text-[11px] py-2 text-center">Gündemde bekleyen görev yok.</p>';
-        return;
-      }
-
-      tasks.forEach(task => {
-        const item = document.createElement('div');
-        item.className = `flex items-center justify-between p-2 rounded-xl border transition ${task.done ? 'bg-slate-50 border-slate-200 text-slate-400' : 'bg-white border-slate-200/90 text-slate-700'}`;
-        item.innerHTML = `
-          <label class="flex items-center gap-2.5 cursor-pointer flex-1">
-            <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask(${task.id})" class="rounded text-cyan-600 focus:ring-cyan-500">
-            <span class="${task.done ? 'line-through text-slate-400' : 'font-medium'}">${escapeHtml(task.text)}</span>
-          </label>
-          <button onclick="deleteTask(${task.id})" class="text-slate-300 hover:text-red-500 p-1 transition">
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-          </button>
-        `;
-        listEl.appendChild(item);
       });
-      lucide.createIcons();
     }
 
-    window.toggleTask = function(id) {
-      tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
-      saveTasks();
-    };
-
-    window.deleteTask = function(id) {
-      tasks = tasks.filter(t => t.id !== id);
-      saveTasks();
-      showToast('Görev kaldırıldı.', 'info');
-    };
-
-    function addTask() {
-      const input = document.getElementById('newTaskInput');
-      const val = input.value.trim();
-      if (!val) return;
-      tasks.push({
-        id: Date.now(),
-        text: val,
-        done: false
-      });
-      input.value = '';
-      saveTasks();
-      showToast('Yeni gündem maddesi eklendi.', 'success');
+    // Not Defteri (LocalStorage)
+    function saveNotes() {
+      const text = document.getElementById('directorNotes').value;
+      localStorage.setItem('6g_director_quick_notes', text);
+      const status = document.getElementById('saveStatus');
+      status.style.display = 'inline-block';
+      setTimeout(() => { status.style.display = 'none'; }, 1500);
     }
 
-    // Not Defteri Yönetimi
     function loadNotes() {
-      const notesEl = document.getElementById('executiveNotes');
-      const stored = localStorage.getItem(STORAGE_KEY_NOTES);
-      if (stored) {
-        notesEl.value = stored;
+      const saved = localStorage.getItem('6g_director_quick_notes');
+      if (saved) {
+        document.getElementById('directorNotes').value = saved;
       }
     }
 
-    function saveNotesAuto() {
-      const notesEl = document.getElementById('executiveNotes');
-      localStorage.setItem(STORAGE_KEY_NOTES, notesEl.value);
-      const statusEl = document.getElementById('noteSaveStatus');
-      statusEl.textContent = 'Kaydedildi (' + new Date().toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'}) + ')';
+    // Günlük Görevler (LocalStorage)
+    let todos = JSON.parse(localStorage.getItem('6g_portal_todos') || '[]');
+
+    if (todos.length === 0) {
+      todos = [
+        { text: 'MEB & Tebliğler Dergisi duyurularını kontrol et', done: false },
+        { text: 'K12NET günlük devam ve yoklama raporunu incele', done: false }
+      ];
     }
 
-    // MEB Mevzuat Arama Yönlendiricisi
-    window.searchMebLegislation = function() {
-      const query = document.getElementById('mebSearchQuery').value.trim();
-      if (!query) {
-        window.open('https://www.mevzuat.gov.tr', '_blank');
-      } else {
-        window.open(`https://www.mevzuat.gov.tr/arama?aranan=${encodeURIComponent(query)}`, '_blank');
-      }
-    };
-
-    // Panoya Kopyalama Fonksiyonu (document.execCommand fallback ile güvenli)
-    function copyTextToClipboard(text) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand('copy');
-        showToast('Metin panoya kopyalandı.', 'success');
-      } catch (err) {
-        showToast('Kopyalama yapılamadı.', 'error');
-      }
-      document.body.removeChild(textarea);
+    function renderTodos() {
+      const list = document.getElementById('todoList');
+      list.innerHTML = '';
+      todos.forEach((todo, index) => {
+        const li = document.createElement('li');
+        li.className = 'todo-item';
+        li.innerHTML = `
+          <input type="checkbox" ${todo.done ? 'checked' : ''} onchange="toggleTodo(${index})">
+          <span style="flex:1; text-decoration: ${todo.done ? 'line-through' : 'none'}; color: ${todo.done ? '#94a3b8' : 'inherit'};">${escapeHtml(todo.text)}</span>
+          <i class="fa-solid fa-xmark" style="color:#cbd5e1; cursor:pointer; font-size:12px;" onclick="deleteTodo(${index})"></i>
+        `;
+        list.appendChild(li);
+      });
+      localStorage.setItem('6g_portal_todos', JSON.stringify(todos));
     }
 
-    // Toast Gösterici
-    function showToast(message, type = 'info') {
-      const toast = document.getElementById('toastNotification');
-      const msgEl = document.getElementById('toastMessage');
-      const iconEl = document.getElementById('toastIcon');
-
-      msgEl.textContent = message;
-
-      if (type === 'success') {
-        iconEl.setAttribute('data-lucide', 'check-circle-2');
-        iconEl.className = 'w-4 h-4 text-emerald-400';
-      } else if (type === 'error') {
-        iconEl.setAttribute('data-lucide', 'alert-circle');
-        iconEl.className = 'w-4 h-4 text-rose-400';
-      } else if (type === 'warning') {
-        iconEl.setAttribute('data-lucide', 'alert-triangle');
-        iconEl.className = 'w-4 h-4 text-amber-400';
-      } else {
-        iconEl.setAttribute('data-lucide', 'info');
-        iconEl.className = 'w-4 h-4 text-cyan-400';
+    function addTodo() {
+      const input = document.getElementById('newTodoInput');
+      const val = input.value.trim();
+      if (val) {
+        todos.push({ text: val, done: false });
+        input.value = '';
+        renderTodos();
       }
-      lucide.createIcons();
-
-      toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      setTimeout(() => {
-        toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3500);
     }
 
-    // HTML Kaçış Yardımcısı
+    function handleTodoKey(e) {
+      if (e.key === 'Enter') addTodo();
+    }
+
+    function toggleTodo(index) {
+      todos[index].done = !todos[index].done;
+      renderTodos();
+    }
+
+    function deleteTodo(index) {
+      todos.splice(index, 1);
+      renderTodos();
+    }
+
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
 
-    // Event Listener Bağlantıları
-    function setupEventListeners() {
-      // Görev Ekle
-      document.getElementById('btnAddTask').addEventListener('click', addTask);
-      document.getElementById('newTaskInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') addTask();
-      });
-
-      // Notlar
-      const notesEl = document.getElementById('executiveNotes');
-      notesEl.addEventListener('input', () => {
-        saveNotesAuto();
-      });
-
-      document.getElementById('btnCopyNotes').addEventListener('click', () => {
-        copyTextToClipboard(notesEl.value);
-      });
-
-      document.getElementById('btnClearNotes').addEventListener('click', () => {
-        notesEl.value = '';
-        saveNotesAuto();
-        showToast('Not defteri temizlendi.', 'info');
-      });
-
-      // AI Eylemleri
-      document.getElementById('btnProcessAI').addEventListener('click', processWithGemini);
-
-      document.getElementById('btnCopyAIOutput').addEventListener('click', () => {
-        const text = document.getElementById('aiOutputText').textContent;
-        copyTextToClipboard(text);
-      });
-
-      document.getElementById('btnTransferToNotes').addEventListener('click', () => {
-        const text = document.getElementById('aiOutputText').textContent;
-        if (!text) return;
-        const current = notesEl.value;
-        const timeHeader = `\n\n--- [AI ÖZETİ - ${new Date().toLocaleDateString('tr-TR')}] ---\n`;
-        notesEl.value = current + timeHeader + text;
-        saveNotesAuto();
-        showToast('Analiz çıktısı not defterinize eklendi.', 'success');
-      });
-
-      // Portallar Filtreleme & Arama
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => {
-            b.classList.remove('bg-white', 'text-blue-800', 'shadow-xs', 'font-semibold');
-            b.classList.add('text-slate-600');
-          });
-          btn.classList.add('bg-white', 'text-blue-800', 'shadow-xs', 'font-semibold');
-          btn.classList.remove('text-slate-600');
-
-          const category = btn.getAttribute('data-category');
-          applyPortalFilters(category, document.getElementById('portalSearchInput').value);
-        });
-      });
-
-      document.getElementById('portalSearchInput').addEventListener('input', (e) => {
-        const activeCategory = document.querySelector('.filter-btn.font-semibold').getAttribute('data-category');
-        applyPortalFilters(activeCategory, e.target.value);
-      });
-
-      // Ayarlar Modal
-      const modal = document.getElementById('settingsModal');
-      document.getElementById('btnOpenSettings').addEventListener('click', () => {
-        const savedKey = localStorage.getItem(STORAGE_KEY_APIKEY) || '';
-        document.getElementById('customApiKeyInput').value = savedKey;
-        modal.classList.remove('hidden');
-      });
-      document.getElementById('btnCloseSettings').addEventListener('click', () => {
-        modal.classList.add('hidden');
-      });
-      document.getElementById('btnSaveSettings').addEventListener('click', () => {
-        const key = document.getElementById('customApiKeyInput').value.trim();
-        if (key) {
-          localStorage.setItem(STORAGE_KEY_APIKEY, key);
-          showToast('Özel API Anahtarı kaydedildi.', 'success');
-        } else {
-          localStorage.removeItem(STORAGE_KEY_APIKEY);
-          showToast('Varsayılan sistem anahtarı devrede.', 'info');
-        }
-        modal.classList.add('hidden');
-      });
-    }
-
-    function applyPortalFilters(category, searchQuery) {
-      const q = (searchQuery || '').toLowerCase().trim();
-      const filtered = PORTALS_DATA.filter(item => {
-        const matchesCategory = category === 'all' || item.category === category;
-        const matchesQuery = !q || item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q) || item.badge.toLowerCase().includes(q);
-        return matchesCategory && matchesQuery;
-      });
-      renderPortals(filtered);
-    }
+    // Sayfa Yüklendiğinde
+    window.addEventListener('DOMContentLoaded', () => {
+      loadNotes();
+      renderTodos();
+    });
   </script>
 </body>
 </html>
