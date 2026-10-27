@@ -1,1013 +1,1208 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>6G Eğitim | Genel Müdürlük Portalı</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    :root {
-      --primary-dark: #0b2545;
-      --primary-blue: #0066cc;
-      --primary-cyan: #00b4d8;
-      --accent-glow: rgba(0, 180, 216, 0.15);
-      --bg-light: #f8fafc;
-      --card-bg: #ffffff;
-      --border-color: #e2e8f0;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 12px -2px rgba(11, 37, 69, 0.08);
-      --shadow-hover: 0 12px 24px -4px rgba(0, 102, 204, 0.16);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6G Eğitim | Genel Müdürlük Portalı</title>
+<meta name="description" content="6G Eğitim Genel Müdürlüğü kurumsal bağlantı, haber, akademik kaynak ve çeviri portalı.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b2545'/%3E%3Cpath d='M50 26v50M50 26c-8-5-22-5-30 0v48c8-5 22-5 30 0M50 26c8-5 22-5 30 0v48c-8-5-22-5-30 0' stroke='%2300b4d8' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+/* ============================================================
+   1. DEĞİŞKENLER (Tema)
+   ============================================================ */
+:root{
+  color-scheme:light;
+  --bg:#f5f7fb;
+  --surface:#ffffff;
+  --surface-2:#eef2f7;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --muted:#64748b;
+  --blue:#0066cc;
+  --cyan:#00b4d8;
+  --navy:#0b2545;
+  --header-bg:rgba(255,255,255,.86);
+  --shadow:0 1px 3px rgba(15,23,42,.06);
+  --shadow-hover:0 16px 32px -14px rgba(0,102,204,.42);
+  --ring:0 0 0 4px rgba(0,180,216,.16);
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#080e1a;
+  --surface:#0f1828;
+  --surface-2:#16233a;
+  --border:#1e2f4a;
+  --text:#e6edf9;
+  --muted:#93a4bd;
+  --blue:#38bdf8;
+  --cyan:#22d3ee;
+  --navy:#e6edf9;
+  --header-bg:rgba(8,14,26,.86);
+  --shadow:0 1px 3px rgba(0,0,0,.5);
+  --shadow-hover:0 16px 32px -14px rgba(0,0,0,.75);
+  --ring:0 0 0 4px rgba(34,211,238,.18);
+}
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;display:flex;flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s ease,color .25s ease;
+}
+a{color:inherit}
+button{font-family:inherit}
+.hidden{display:none !important}
 
-    /* Üst Header / Navigasyon */
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
+/* ============================================================
+   2. ÜST BAR
+   ============================================================ */
+header{
+  position:sticky;top:0;z-index:60;
+  background:var(--header-bg);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.header-in{
+  max-width:1440px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:14px;
+}
+.header-in.alt{padding-top:0;padding-bottom:10px}
 
-    .header-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
+.marka{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.marka svg{width:36px;height:36px;flex-shrink:0}
+.marka b{font-size:19px;font-weight:800;letter-spacing:-.4px;display:block;line-height:1.15}
+.marka b .g{background:linear-gradient(135deg,#00b4d8,#0066cc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.marka small{font-size:9.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted)}
 
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
+.ara{flex:1;max-width:560px;position:relative;min-width:0}
+.ara input{
+  width:100%;padding:10px 46px 10px 40px;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface-2);color:var(--text);
+  font:inherit;font-size:13.5px;outline:none;transition:all .18s ease;
+}
+.ara input::-webkit-search-cancel-button{-webkit-appearance:none}
+.ara input:focus{background:var(--surface);border-color:var(--blue);box-shadow:var(--ring)}
+.ara .cam{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none}
+.ara kbd{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);
+  font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;
+  border:1px solid var(--border);color:var(--muted);background:var(--surface);
+}
 
-    .logo-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.header-sag{display:flex;align-items:center;gap:8px;margin-left:auto}
+.saat{
+  display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+  padding:8px 13px;border-radius:999px;background:var(--surface-2);
+  border:1px solid var(--border);white-space:nowrap;
+}
+.nokta{width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.2);flex-shrink:0}
+.ayrac{opacity:.3}
+.ikon-btn{
+  width:36px;height:36px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);cursor:pointer;
+  display:grid;place-items:center;font-size:13px;transition:all .18s ease;flex-shrink:0;
+}
+.ikon-btn:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
 
-    .logo-icon-svg {
-      width: 44px;
-      height: 44px;
-    }
+/* Kategori çipleri */
+.cipler{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.cipler::-webkit-scrollbar{display:none}
+.cip{
+  padding:6px 13px;border-radius:999px;border:1px solid var(--border);
+  background:var(--surface);color:var(--muted);font-size:12px;font-weight:700;
+  cursor:pointer;white-space:nowrap;transition:all .16s ease;
+}
+.cip:hover{color:var(--text);border-color:var(--muted)}
+.cip.aktif{background:linear-gradient(135deg,var(--navy),#134074);color:#fff;border-color:transparent;box-shadow:0 4px 12px -4px rgba(11,37,69,.5)}
+[data-theme="dark"] .cip.aktif{background:linear-gradient(135deg,#0066cc,#00b4d8);color:#04121f}
 
-    .logo-text {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
-    }
+/* ============================================================
+   3. YERLEŞİM
+   ============================================================ */
+main{max-width:1440px;margin:0 auto;padding:22px 20px 40px;width:100%;flex:1}
+.duzen{display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:22px;align-items:start}
+@media(max-width:1080px){ .duzen{grid-template-columns:1fr} }
 
-    .logo-text .num-g {
-      background: linear-gradient(135deg, #00b4d8 0%, #0066cc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-right: 4px;
-    }
+/* ============================================================
+   4. GRUP + KARTLAR
+   ============================================================ */
+.grup{margin-bottom:26px}
+.grup-bas{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.grup-ikon{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;font-size:12px;flex-shrink:0}
+.grup-bas h2{font-size:15.5px;font-weight:800;letter-spacing:-.2px}
+.grup-bas .sayi{font-size:10.5px;font-weight:800;color:var(--muted);background:var(--surface-2);padding:2px 8px;border-radius:999px}
 
-    .logo-text .egitim {
-      color: var(--primary-dark);
-      font-weight: 700;
-    }
+.izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:11px}
 
-    .portal-tag {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      background: var(--accent-glow);
-      color: var(--primary-blue);
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid rgba(0, 180, 216, 0.3);
-    }
+.kart-sar{position:relative;min-width:0}
+.kart{
+  display:flex;align-items:center;gap:11px;height:100%;
+  padding:12px 46px 12px 12px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  text-decoration:none;box-shadow:var(--shadow);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.kart:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:var(--shadow-hover)}
+.kart-ikon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.kart-govde{min-width:0}
+.kart-ad{font-size:13px;font-weight:700;line-height:1.25;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kart-ac{font-size:11px;color:var(--muted);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
-    /* Arama Çubuğu */
-    .search-box {
-      flex: 1;
-      max-width: 460px;
-      position: relative;
-    }
+.tr-btn{
+  position:absolute;top:8px;right:8px;z-index:2;
+  font-size:9.5px;font-weight:800;letter-spacing:.6px;
+  padding:3px 7px;border-radius:6px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  opacity:0;transition:all .16s ease;
+}
+.kart-sar:hover .tr-btn{opacity:1}
+.kart-sar[data-yabanci="1"] .tr-btn{opacity:.7}
+.tr-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);opacity:1}
 
-    .search-box i {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 15px;
-    }
+.bos-durum{
+  grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--muted);
+  border:1px dashed var(--border);border-radius:16px;font-size:13px;
+}
+.bos-durum i{font-size:26px;display:block;margin-bottom:10px;opacity:.5}
 
-    .search-box input {
-      width: 100%;
-      padding: 11px 16px 11px 44px;
-      border-radius: 30px;
-      border: 1px solid var(--border-color);
-      background: #f1f5f9;
-      font-family: inherit;
-      font-size: 14px;
-      color: var(--text-main);
-      transition: all 0.2s ease;
-      outline: none;
-    }
+/* İkon renkleri */
+.i-blue{background:rgba(2,132,199,.13);color:#0284c7}
+.i-red{background:rgba(220,38,38,.13);color:#dc2626}
+.i-violet{background:rgba(124,58,237,.13);color:#7c3aed}
+.i-green{background:rgba(22,163,74,.13);color:#16a34a}
+.i-amber{background:rgba(217,119,6,.14);color:#d97706}
+.i-pink{background:rgba(219,39,119,.13);color:#db2777}
+.i-cyan{background:rgba(8,145,178,.13);color:#0891b2}
+.i-slate{background:rgba(71,85,105,.13);color:#475569}
+.i-teal{background:rgba(13,148,136,.13);color:#0d9488}
+.i-indigo{background:rgba(79,70,229,.13);color:#4f46e5}
+[data-theme="dark"] .i-blue{background:rgba(56,189,248,.15);color:#38bdf8}
+[data-theme="dark"] .i-red{background:rgba(248,113,113,.15);color:#f87171}
+[data-theme="dark"] .i-violet{background:rgba(167,139,250,.15);color:#a78bfa}
+[data-theme="dark"] .i-green{background:rgba(74,222,128,.15);color:#4ade80}
+[data-theme="dark"] .i-amber{background:rgba(251,191,36,.15);color:#fbbf24}
+[data-theme="dark"] .i-pink{background:rgba(244,114,182,.15);color:#f472b6}
+[data-theme="dark"] .i-cyan{background:rgba(34,211,238,.15);color:#22d3ee}
+[data-theme="dark"] .i-slate{background:rgba(203,213,225,.12);color:#cbd5e1}
+[data-theme="dark"] .i-teal{background:rgba(45,212,191,.15);color:#2dd4bf}
+[data-theme="dark"] .i-indigo{background:rgba(129,140,248,.15);color:#818cf8}
 
-    .search-box input:focus {
-      background: #ffffff;
-      border-color: var(--primary-blue);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-    }
+/* ============================================================
+   5. YAN PANEL
+   ============================================================ */
+.yankenar{display:flex;flex-direction:column;gap:14px;position:sticky;top:104px}
+@media(max-width:1080px){ .yankenar{position:static} }
 
-    /* Sağ Bilgi & Saat */
-    .header-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+.panel{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:15px;box-shadow:var(--shadow);
+  scroll-margin-top:110px;
+}
+.panel-bas{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.panel-bas i{font-size:14px;color:var(--blue)}
+.panel-bas h3{font-size:13.5px;font-weight:800;letter-spacing:-.15px}
+.panel-bas .etiket{
+  margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.4px;
+  text-transform:uppercase;padding:3px 7px;border-radius:999px;
+  background:rgba(16,185,129,.13);color:#059669;
+}
+[data-theme="dark"] .panel-bas .etiket{color:#34d399}
 
-    .time-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary-dark);
-      background: #f8fafc;
-      padding: 8px 14px;
-      border-radius: 24px;
-      border: 1px solid var(--border-color);
-    }
+.sekmeler{display:flex;gap:3px;background:var(--surface-2);padding:3px;border-radius:10px;margin-bottom:12px}
+.sekme{
+  flex:1;padding:7px 4px;border:none;background:transparent;border-radius:8px;
+  font-size:11.5px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s ease;
+}
+.sekme.aktif{background:var(--surface);color:var(--blue);box-shadow:var(--shadow)}
 
-    .time-badge .dot {
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-    }
+.alan{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:5px}
+.girdi,textarea.girdi{
+  width:100%;padding:9px 11px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface-2);color:var(--text);font:inherit;font-size:12.5px;
+  outline:none;transition:all .16s ease;
+}
+.girdi:focus{background:var(--surface);border-color:var(--blue);box-shadow:var(--ring)}
+textarea.girdi{resize:vertical;line-height:1.55}
+select.girdi{cursor:pointer;appearance:none;background-image:none}
 
-    /* Ana Konteyner */
-    main {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 30px 24px;
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-    }
+.satir{display:flex;gap:7px;margin-top:9px}
+.satir > *{min-width:0}
+.satir select{flex:0 0 108px}
 
-    /* Bölüm Başlıkları */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #eef2f6;
-    }
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px 14px;border-radius:10px;border:1px solid transparent;
+  font-size:12px;font-weight:700;cursor:pointer;transition:all .16s ease;white-space:nowrap;
+}
+.btn-birincil{background:linear-gradient(135deg,#0066cc,#00b4d8);color:#fff;box-shadow:0 6px 16px -8px rgba(0,102,204,.9)}
+.btn-birincil:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn-birincil:disabled{opacity:.6;cursor:progress;transform:none}
+.btn-hayalet{background:var(--surface-2);color:var(--text);border-color:var(--border)}
+.btn-hayalet:hover{border-color:var(--blue);color:var(--blue)}
+.btn-tam{flex:1}
 
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
+.ipucu{font-size:10.5px;color:var(--muted);line-height:1.5;margin-top:8px}
+.ipucu a{color:var(--blue);text-decoration:none;font-weight:700}
+.ipucu a:hover{text-decoration:underline}
 
-    .section-title i {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      font-size: 16px;
-    }
+.son-linkler{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.son-linkler:empty{display:none}
+.mini-cip{
+  font-size:10px;font-weight:700;padding:4px 9px;border-radius:999px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+  cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.mini-cip:hover{color:var(--blue);border-color:var(--blue)}
 
-    .title-daily i { background: #e0f2fe; color: #0284c7; }
-    .title-edu i { background: #ede9fe; color: #7c3aed; }
-    .title-news i { background: #fee2e2; color: #dc2626; }
-    .title-tools i { background: #dcfce7; color: #16a34a; }
+.cikti{margin-top:11px;border:1px solid var(--border);border-radius:11px;overflow:hidden}
+.cikti-bas{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:7px 11px;background:var(--surface-2);font-size:10.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
+}
+.cikti-bas button{
+  background:none;border:none;color:var(--blue);font-size:10.5px;font-weight:800;
+  cursor:pointer;text-transform:none;letter-spacing:0;
+}
+.cikti-metin{
+  padding:11px;font-size:12.5px;line-height:1.62;white-space:pre-wrap;
+  max-height:300px;overflow:auto;word-break:break-word;
+}
+.cikti-metin.hata{color:#dc2626;font-size:11.5px}
+[data-theme="dark"] .cikti-metin.hata{color:#f87171}
 
-    .item-count {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: #f1f5f9;
-      padding: 3px 10px;
-      border-radius: 12px;
-    }
+/* Görevler */
+.gorev-liste{list-style:none;display:flex;flex-direction:column;gap:6px;max-height:210px;overflow-y:auto}
+.gorev{
+  display:flex;align-items:center;gap:9px;padding:8px 10px;
+  background:var(--surface-2);border:1px solid var(--border);border-radius:9px;font-size:12px;
+}
+.gorev input[type="checkbox"]{width:15px;height:15px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+.gorev span{flex:1;min-width:0;word-break:break-word;line-height:1.4}
+.gorev.tamam span{text-decoration:line-through;color:var(--muted)}
+.gorev .sil{
+  background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;
+  padding:2px 4px;border-radius:4px;opacity:.55;transition:.15s;
+}
+.gorev .sil:hover{opacity:1;color:#dc2626}
+.gorev-alt{display:flex;align-items:center;justify-content:space-between;margin-top:9px;font-size:10.5px;color:var(--muted)}
+.gorev-alt button{background:none;border:none;color:var(--muted);font-size:10.5px;font-weight:700;cursor:pointer;padding:2px}
+.gorev-alt button:hover{color:#dc2626}
+.gorev-bos{font-size:11.5px;color:var(--muted);text-align:center;padding:14px 0;font-style:italic}
 
-    /* Grid Sistemleri */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 16px;
-    }
+/* Notlar */
+.not-alt{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:10.5px;color:var(--muted)}
+.not-alt .kayit{color:#10b981;opacity:0;transition:opacity .3s}
+.not-alt .kayit.gorunur{opacity:1}
 
-    .cards-grid-news {
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    }
+/* Toast */
+#toast{
+  position:fixed;bottom:20px;right:20px;z-index:100;
+  background:var(--navy);color:#fff;
+  padding:11px 16px;border-radius:11px;font-size:12.5px;font-weight:600;
+  display:flex;align-items:center;gap:9px;
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.6);
+  transform:translateY(80px);opacity:0;pointer-events:none;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  max-width:calc(100vw - 40px);
+}
+[data-theme="dark"] #toast{background:#1e3a5f;border:1px solid #2f4f78}
+#toast.gorunur{transform:translateY(0);opacity:1}
+#toast i{font-size:13px;color:#22d3ee}
 
-    /* Kart Tasarımı */
-    .portal-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 16px 18px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
+/* Footer */
+footer{
+  border-top:1px solid var(--border);background:var(--surface);
+  padding:16px 20px;font-size:11.5px;color:var(--muted);text-align:center;
+}
+footer .ic{max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+footer b{color:var(--text)}
 
-    .portal-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: transparent;
-      transition: background 0.2s ease;
-    }
-
-    .portal-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: #cbd5e1;
-    }
-
-    .portal-card:hover::before {
-      background: linear-gradient(to bottom, var(--primary-cyan), var(--primary-blue));
-    }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-      background: #f8fafc;
-      transition: transform 0.2s ease;
-    }
-
-    .portal-card:hover .card-icon {
-      transform: scale(1.08);
-    }
-
-    .card-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 2px;
-    }
-
-    .card-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .external-arrow {
-      font-size: 11px;
-      color: #94a3b8;
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s ease;
-    }
-
-    .portal-card:hover .external-arrow {
-      opacity: 1;
-      transform: translateX(0);
-      color: var(--primary-blue);
-    }
-
-    /* Özel İkon Renkleri */
-    .icon-k12 { background: #e0f2fe; color: #0284c7; }
-    .icon-gmail { background: #fee2e2; color: #ea4335; }
-    .icon-drive { background: #fef3c7; color: #fbbc04; }
-    .icon-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
-    .icon-fb { background: #1877f2; color: #fff; }
-    
-    .icon-dergipark { background: #fdf2f8; color: #db2777; }
-    .icon-ttkb { background: #ede9fe; color: #6d28d9; }
-    .icon-meb { background: #fee2e2; color: #dc2626; }
-    .icon-tubitak { background: #eff6ff; color: #2563eb; }
-    .icon-tedmem { background: #f0fdf4; color: #16a34a; }
-    .icon-erg { background: #fefce8; color: #ca8a04; }
-    .icon-unesco { background: #e0f2fe; color: #0284c7; }
-    .icon-oecd { background: #f1f5f9; color: #475569; }
-    .icon-edsurge { background: #faf5ff; color: #9333ea; }
-    .icon-edutopia { background: #ecfdf5; color: #059669; }
-
-    .icon-sabah { background: #fff1f2; color: #e11d48; }
-    .icon-yenisafak { background: #eff6ff; color: #1d4ed8; }
-    .icon-hurriyet { background: #fee2e2; color: #b91c1c; }
-    .icon-aksam { background: #fef2f2; color: #ef4444; }
-    .icon-posta { background: #fff7ed; color: #ea580c; }
-    .icon-aa { background: #e0f2fe; color: #0369a1; }
-    .icon-enson { background: #fef2f2; color: #dc2626; }
-    .icon-vatan { background: #f8fafc; color: #334155; }
-    .icon-haberler { background: #fef2f2; color: #e11d48; }
-    .icon-gumushane { background: #ecfdf5; color: #047857; }
-    .icon-gazete { background: #f8fafc; color: #475569; }
-
-    /* Alt Çalışma Alanı (Hızlı Notlar & Görevler) */
-    .workspace-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .desk-card {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .desk-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .desk-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .desk-textarea {
-      width: 100%;
-      height: 120px;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 12px;
-      font-family: inherit;
-      font-size: 13px;
-      color: var(--text-main);
-      background: #f8fafc;
-      resize: vertical;
-      outline: none;
-      transition: border 0.2s ease;
-    }
-
-    .desk-textarea:focus {
-      border-color: var(--primary-blue);
-      background: #ffffff;
-    }
-
-    .status-msg {
-      font-size: 11px;
-      color: #10b981;
-      display: none;
-    }
-
-    /* Hızlı Görevler Listesi */
-    .todo-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 120px;
-      overflow-y: auto;
-    }
-
-    .todo-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      padding: 8px 10px;
-      background: #f8fafc;
-      border-radius: 8px;
-      border: 1px solid #f1f5f9;
-    }
-
-    .todo-item input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--primary-blue);
-      cursor: pointer;
-    }
-
-    .todo-input-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .todo-input {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      font-size: 13px;
-      font-family: inherit;
-      outline: none;
-    }
-
-    .todo-btn {
-      padding: 8px 14px;
-      background: var(--primary-blue);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .todo-btn:hover {
-      background: #0052a3;
-    }
-
-    /* Footer */
-    footer {
-      background: #ffffff;
-      border-top: 1px solid var(--border-color);
-      padding: 16px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: auto;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .workspace-grid {
-        grid-template-columns: 1fr;
-      }
-      .header-inner {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .search-box {
-        max-width: 100%;
-      }
-    }
-  </style>
+/* Responsive */
+@media(max-width:760px){
+  .header-in{flex-wrap:wrap;gap:10px;padding:10px 14px}
+  .ara{order:3;flex-basis:100%;max-width:none}
+  .ara kbd{display:none}
+  .saat{display:none}
+  main{padding:16px 14px 32px}
+  .izgara{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px}
+  .kart{padding:10px 38px 10px 10px;gap:9px}
+  .kart-ikon{width:34px;height:34px;font-size:14px;border-radius:9px}
+  .kart-ad{font-size:12px}
+  .kart-ac{font-size:10.5px;-webkit-line-clamp:1}
+  .tr-btn{opacity:.7}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 
-  <!-- Üst Bar / Header -->
-  <header>
-    <div class="header-inner">
-      <div class="brand-wrap">
-        <div class="logo-badge">
-          <!-- 6G Eğitim Kurumsal Vektör İkonu -->
-          <svg class="logo-icon-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 24V82M50 24C41 18 24 18 14 24V78C24 72 41 72 50 78M50 24C59 18 76 18 86 24V78C76 72 59 72 50 78" stroke="url(#logo_grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="14" cy="51" r="5" fill="#00b4d8"/>
-            <circle cx="86" cy="51" r="5" fill="#0066cc"/>
-            <circle cx="50" cy="80" r="5" fill="#0b2545"/>
-            <defs>
-              <linearGradient id="logo_grad" x1="14" y1="20" x2="86" y2="80" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#00b4d8"/>
-                <stop offset="1" stop-color="#0066cc"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <div class="logo-text">
-            <span class="num-g">6G</span>
-            <span class="egitim">Eğitim</span>
-          </div>
-        </div>
-        <span class="portal-tag">Genel Müdürlük</span>
-      </div>
+<!-- ================= ÜST BAR ================= -->
+<header>
+  <div class="header-in">
+    <a class="marka" href="./">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M50 24V82M50 24C41 18 24 18 14 24V78C24 72 41 72 50 78M50 24C59 18 76 18 86 24V78C76 72 59 72 50 78"
+              stroke="url(#lg)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="14" cy="51" r="5" fill="#00b4d8"/>
+        <circle cx="86" cy="51" r="5" fill="#0066cc"/>
+        <circle cx="50" cy="80" r="5" fill="#0b2545"/>
+        <defs><linearGradient id="lg" x1="14" y1="20" x2="86" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#00b4d8"/><stop offset="1" stop-color="#0066cc"/>
+        </linearGradient></defs>
+      </svg>
+      <span>
+        <b><span class="g">6G</span> Eğitim</b>
+        <small>Genel Müdürlük Portalı</small>
+      </span>
+    </a>
 
-      <!-- Canlı Arama -->
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="liveSearch" placeholder="Portallarda veya haber sitelerinde ara..." onkeyup="filterCards()">
-      </div>
-
-      <!-- Saat ve Durum -->
-      <div class="header-meta">
-        <div class="time-badge">
-          <span class="dot"></span>
-          <span id="currentDate">--</span>
-          <span style="opacity: 0.3;">|</span>
-          <span id="currentTime" style="font-weight: 700;">--:--</span>
-        </div>
-      </div>
+    <div class="ara">
+      <i class="fa-solid fa-magnifying-glass cam"></i>
+      <input id="aramaInput" type="search" placeholder="Kaynak, haber veya portal ara…" autocomplete="off" aria-label="Arama">
+      <kbd>/</kbd>
     </div>
-  </header>
 
-  <!-- Ana İçerik -->
-  <main>
+    <div class="header-sag">
+      <div class="saat" title="Yerel saat">
+        <span class="nokta"></span>
+        <span id="tarih">—</span>
+        <span class="ayrac">|</span>
+        <span id="saat" style="font-weight:800">--:--</span>
+      </div>
+      <button class="ikon-btn" id="ceviriGit" title="Çeviri merkezi" aria-label="Çeviri merkezi">
+        <i class="fa-solid fa-language"></i>
+      </button>
+      <button class="ikon-btn" id="temaBtn" title="Açık / koyu tema" aria-label="Tema değiştir">
+        <i class="fa-solid fa-moon" id="temaIkon"></i>
+      </button>
+    </div>
+  </div>
 
-    <!-- 1. BÖLÜM: GÜNLÜK KULLANIMLAR -->
-    <section>
-      <div class="section-header">
-        <div class="section-title title-daily">
-          <i class="fa-solid fa-bolt"></i>
-          <span>Günlük Kullanımlar</span>
+  <div class="header-in alt">
+    <nav class="cipler" id="cipler" aria-label="Kategoriler"></nav>
+  </div>
+</header>
+
+<!-- ================= İÇERİK ================= -->
+<main>
+  <div class="duzen">
+
+    <!-- SOL: KAYNAK KARTLARI -->
+    <div id="icerik"></div>
+
+    <!-- SAĞ: ARAÇLAR -->
+    <aside class="yankenar">
+
+      <!-- ÇEVİRİ MERKEZİ -->
+      <section class="panel" id="ceviri">
+        <div class="panel-bas">
+          <i class="fa-solid fa-language"></i>
+          <h3>Çeviri Merkezi</h3>
+          <span class="etiket">API anahtarı yok</span>
         </div>
-        <span class="item-count">5 Bağlantı</span>
-      </div>
-      <div class="cards-grid">
-        <!-- K12NET -->
-        <a href="https://portal.k12net.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="k12 k12net okul yönetim öğrenci veli">
-          <div class="card-icon icon-k12"><i class="fa-solid fa-graduation-cap"></i></div>
-          <div class="card-info">
-            <div class="card-title">K12NET</div>
-            <div class="card-desc">Okul Bilgi Sistemi</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
 
-        <!-- Gmail -->
-        <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="gmail google mail posta e-posta">
-          <div class="card-icon icon-gmail"><i class="fa-solid fa-envelope"></i></div>
-          <div class="card-info">
-            <div class="card-title">Gmail</div>
-            <div class="card-desc">Kurumsal E-Posta</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Drive -->
-        <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="drive google drive bulut dosyalar arşiv">
-          <div class="card-icon icon-drive"><i class="fa-brands fa-google-drive"></i></div>
-          <div class="card-info">
-            <div class="card-title">Google Drive</div>
-            <div class="card-desc">Dosya & Arşiv Deposu</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Instagram -->
-        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="instagram sosyal medya paylasim">
-          <div class="card-icon icon-insta"><i class="fa-brands fa-instagram"></i></div>
-          <div class="card-info">
-            <div class="card-title">Instagram</div>
-            <div class="card-desc">Kurumsal Sosyal Medya</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Facebook -->
-        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="facebook meta sosyal medya topluluk">
-          <div class="card-icon icon-fb"><i class="fa-brands fa-facebook-f"></i></div>
-          <div class="card-info">
-            <div class="card-title">Facebook</div>
-            <div class="card-desc">Topluluk & Reklam</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-      </div>
-    </section>
-
-    <!-- 2. BÖLÜM: ULUSAL BASIN VE HABER SİTELERİ -->
-    <section>
-      <div class="section-header">
-        <div class="section-title title-news">
-          <i class="fa-solid fa-newspaper"></i>
-          <span>Ulusal Basın ve Haber Siteleri</span>
+        <div class="sekmeler" role="tablist">
+          <button class="sekme aktif" data-sekme="link" role="tab">Bağlantı Çevir</button>
+          <button class="sekme" data-sekme="metin" role="tab">Metin Çevir</button>
         </div>
-        <span class="item-count">11 Kaynak</span>
-      </div>
-      <div class="cards-grid cards-grid-news">
-        <!-- Sabah -->
-        <a href="https://www.sabah.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="sabah gazete haber ulusal gündem">
-          <div class="card-icon icon-sabah"><i class="fa-solid fa-paper-plane"></i></div>
-          <div class="card-info">
-            <div class="card-title">Sabah</div>
-            <div class="card-desc">sabah.com.tr</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
 
-        <!-- Yeni Şafak -->
-        <a href="https://www.yenisafak.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="yeni şafak yenisafak gazete haber">
-          <div class="card-icon icon-yenisafak"><i class="fa-solid fa-sun"></i></div>
-          <div class="card-info">
-            <div class="card-title">Yeni Şafak</div>
-            <div class="card-desc">yenisafak.com</div>
+        <!-- Bağlantı çeviri -->
+        <div id="sekme-link">
+          <label class="alan" for="linkInput">Yabancı sayfa adresi</label>
+          <input id="linkInput" class="girdi" type="url" placeholder="https://www.oecd.org/education/…" autocomplete="off">
+          <div class="satir">
+            <select id="linkHedef" class="girdi" aria-label="Hedef dil">
+              <option value="tr">Türkçe</option>
+              <option value="en">İngilizce</option>
+              <option value="de">Almanca</option>
+              <option value="fr">Fransızca</option>
+              <option value="ar">Arapça</option>
+            </select>
+            <button class="btn btn-birincil btn-tam" id="btnLinkCevir">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Çevirerek Aç
+            </button>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Hürriyet -->
-        <a href="https://www.hurriyet.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="hürriyet hurriyet gazete manset">
-          <div class="card-icon icon-hurriyet"><i class="fa-solid fa-h"></i></div>
-          <div class="card-info">
-            <div class="card-title">Hürriyet</div>
-            <div class="card-desc">hurriyet.com.tr</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Akşam -->
-        <a href="https://www.aksam.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="akşam aksam gazete haber">
-          <div class="card-icon icon-aksam"><i class="fa-solid fa-moon"></i></div>
-          <div class="card-info">
-            <div class="card-title">Akşam</div>
-            <div class="card-desc">aksam.com.tr</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Posta -->
-        <a href="https://www.posta.com.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="posta gazetesi haber">
-          <div class="card-icon icon-posta"><i class="fa-solid fa-envelope-open-text"></i></div>
-          <div class="card-info">
-            <div class="card-title">Posta</div>
-            <div class="card-desc">posta.com.tr</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Anadolu Ajansı -->
-        <a href="https://www.aa.com.tr/tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="anadolu ajansı aa resmi bülten ajans">
-          <div class="card-icon icon-aa"><i class="fa-solid fa-broadcast-tower"></i></div>
-          <div class="card-info">
-            <div class="card-title">Anadolu Ajansı</div>
-            <div class="card-desc">aa.com.tr</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Ensonhaber -->
-        <a href="https://www.ensonhaber.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="ensonhaber son dakika haber">
-          <div class="card-icon icon-enson"><i class="fa-solid fa-bolt-lightning"></i></div>
-          <div class="card-info">
-            <div class="card-title">Ensonhaber</div>
-            <div class="card-desc">ensonhaber.com</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Vatan -->
-        <a href="https://www.gazetevatan.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="vatan gazete vatan haber">
-          <div class="card-icon icon-vatan"><i class="fa-solid fa-flag"></i></div>
-          <div class="card-info">
-            <div class="card-title">Vatan</div>
-            <div class="card-desc">gazetevatan.com</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Haberler.com -->
-        <a href="https://www.haberler.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="haberler son dakika gundem">
-          <div class="card-icon icon-haberler"><i class="fa-solid fa-bullhorn"></i></div>
-          <div class="card-info">
-            <div class="card-title">Haberler.com</div>
-            <div class="card-desc">haberler.com</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Gazeteler / Manşetler -->
-        <a href="https://www.gazeteler.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="gazete gazeteler mansetler birinci sayfalar">
-          <div class="card-icon icon-gazete"><i class="fa-solid fa-sheet-plastic"></i></div>
-          <div class="card-info">
-            <div class="card-title">Gazete Manşetleri</div>
-            <div class="card-desc">Tüm Gazeteler</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Gümüşhane Haber -->
-        <a href="https://www.gumushane.gen.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="gümüşhane haber yerel gumushane olay ekspres">
-          <div class="card-icon icon-gumushane"><i class="fa-solid fa-mountain"></i></div>
-          <div class="card-info">
-            <div class="card-title">Gümüşhane Haber</div>
-            <div class="card-desc">Yerel Basın & Gündem</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-      </div>
-    </section>
-
-    <!-- 3. BÖLÜM: EĞİTİM & AKADEMİ KAYNAKLARI MERKEZİ -->
-    <section>
-      <div class="section-header">
-        <div class="section-title title-edu">
-          <i class="fa-solid fa-book-open-reader"></i>
-          <span>Eğitim & Akademi Kaynakları Merkezi</span>
+          <p class="ipucu">
+            Sayfa yeni sekmede makine çevirisiyle açılır. Çeviri uygulanmazsa sayfada
+            <b>sağ tık → “Türkçe’ye çevir”</b> (Chrome/Edge) veya metni kopyalayıp
+            <b>Metin Çevir</b> sekmesine yapıştırın.
+            <a href="#" id="linkGoogle">Google Çeviri’yi ayrı aç</a>
+          </p>
+          <div class="son-linkler" id="sonLinkler"></div>
         </div>
-        <span class="item-count">10 Portal</span>
-      </div>
-      <div class="cards-grid">
-        <!-- DergiPark -->
-        <a href="https://dergipark.org.tr/tr/" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="dergipark akademik makale arastirma egitim dergileri">
-          <div class="card-icon icon-dergipark"><i class="fa-solid fa-scroll"></i></div>
-          <div class="card-info">
-            <div class="card-title">DergiPark</div>
-            <div class="card-desc">Akademik Eğitim Makaleleri</div>
+
+        <!-- Metin çeviri -->
+        <div id="sekme-metin" class="hidden">
+          <label class="alan" for="metinInput">Yabancı metin</label>
+          <textarea id="metinInput" class="girdi" rows="5" placeholder="İngilizce bir haber, makale özeti veya rapor paragrafını buraya yapıştırın…"></textarea>
+          <div class="satir">
+            <select id="metinHedef" class="girdi" aria-label="Hedef dil">
+              <option value="tr">Türkçe</option>
+              <option value="en">İngilizce</option>
+              <option value="de">Almanca</option>
+              <option value="fr">Fransızca</option>
+              <option value="ar">Arapça</option>
+            </select>
+            <button class="btn btn-birincil btn-tam" id="btnMetinCevir">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Çevir
+            </button>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- TTKB -->
-        <a href="https://ttkb.meb.gov.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="ttkb talim terbiye kurulu mufredat ders kitabi program">
-          <div class="card-icon icon-ttkb"><i class="fa-solid fa-scale-balanced"></i></div>
-          <div class="card-info">
-            <div class="card-title">Talim ve Terbiye (TTKB)</div>
-            <div class="card-desc">Müfredat ve Kararlar</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- MEB Duyurular -->
-        <a href="https://www.meb.gov.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="meb milli egitim bakanligi resmi tebligler genelge">
-          <div class="card-icon icon-meb"><i class="fa-solid fa-landmark"></i></div>
-          <div class="card-info">
-            <div class="card-title">Milli Eğitim Bakanlığı</div>
-            <div class="card-desc">Resmi Duyuru & Tebliğler</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- TÜBİTAK -->
-        <a href="https://www.tubitak.gov.tr" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="tubitak bilim proje arastirma bilgem">
-          <div class="card-icon icon-tubitak"><i class="fa-solid fa-atom"></i></div>
-          <div class="card-info">
-            <div class="card-title">TÜBİTAK</div>
-            <div class="card-desc">Bilim & Proje Destekleri</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- YÖK Ulusal Tez Merkezi -->
-        <a href="https://tez.yok.gov.tr/UlusalTezMerkezi/" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="yoktez yok tez ulusal tez merkezi akademik arastirma yuksek lisans doktora">
-          <div class="card-icon" style="background: #eff6ff; color: #1d4ed8;"><i class="fa-solid fa-graduation-cap"></i></div>
-          <div class="card-info">
-             <div class="card-title">YÖK Tez Merkezi</div>
-             <div class="card-desc">Ulusal Tez & Araştırma Taraması</div>
-         </div>
-         <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-         </a>
-
-        <!-- TEDMEM -->
-        <a href="https://tedmem.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="tedmem egitim analiz rapor ted politika">
-          <div class="card-icon icon-tedmem"><i class="fa-solid fa-chart-pie"></i></div>
-          <div class="card-info">
-            <div class="card-title">TEDMEM</div>
-            <div class="card-desc">Eğitim Raporları & Analiz</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- ERG -->
-        <a href="https://www.egitimreformugirisimi.org" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="erg egitim reformu girisimi izleme politika">
-          <div class="card-icon icon-erg"><i class="fa-solid fa-compass-drafting"></i></div>
-          <div class="card-info">
-            <div class="card-title">Eğitim Reformu Girişimi</div>
-            <div class="card-desc">ERG Politika Notları</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- UNESCO -->
-        <a href="https://www.unesco.org/en/education" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="unesco kuresel uluslararasi global egitim politikasi">
-          <div class="card-icon icon-unesco"><i class="fa-solid fa-globe"></i></div>
-          <div class="card-info">
-            <div class="card-title">UNESCO Education</div>
-            <div class="card-desc">Küresel Eğitim Raporları</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- OECD -->
-        <a href="https://www.oecd.org/education" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="oecd pisa egitim verileri karsilastirmali">
-          <div class="card-icon icon-oecd"><i class="fa-solid fa-chart-line"></i></div>
-          <div class="card-info">
-            <div class="card-title">OECD & PISA</div>
-            <div class="card-desc">Uluslararası Eğitim Verileri</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- EdSurge -->
-        <a href="https://www.edsurge.com" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="edsurge egitim teknolojileri edtech yapay zeka">
-          <div class="card-icon icon-edsurge"><i class="fa-solid fa-laptop-code"></i></div>
-          <div class="card-info">
-            <div class="card-title">EdSurge</div>
-            <div class="card-desc">Eğitim Teknolojileri (EdTech)</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-
-        <!-- Edutopia -->
-        <a href="https://www.edutopia.org" target="_blank" rel="noopener noreferrer" class="portal-card" data-tags="edutopia ogretim metodlari sinif yonetimi pedagoji">
-          <div class="card-icon icon-edutopia"><i class="fa-solid fa-lightbulb"></i></div>
-          <div class="card-info">
-            <div class="card-title">Edutopia</div>
-            <div class="card-desc">Yenilikçi Öğretim Stratejileri</div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square external-arrow"></i>
-        </a>
-      </div>
-    </section>
-
-    <!-- 4. BÖLÜM: YÖNETİCİ ÇALIŞMA MASASI (HIZLI NOT & GÖREVLER) -->
-    <section class="workspace-grid">
-      <!-- Yerel Not Defteri -->
-      <div class="desk-card">
-        <div class="desk-header">
-          <div class="desk-title">
-            <i class="fa-regular fa-pen-to-square" style="color: var(--primary-blue);"></i>
-            <span>Masa Notları (Otomatik Kaydedilir)</span>
-          </div>
-          <span class="status-msg" id="saveStatus"><i class="fa-solid fa-check"></i> Kaydedildi</span>
-        </div>
-        <textarea class="desk-textarea" id="directorNotes" placeholder="Günlük hızlı notlarınızı, telefon numaralarını veya hatırlatmaları buraya yazabilirsiniz..." oninput="saveNotes()"></textarea>
-      </div>
-
-      <!-- Günlük Görevler / Checklist -->
-      <div class="desk-card">
-        <div class="desk-header">
-          <div class="desk-title">
-            <i class="fa-solid fa-list-check" style="color: #10b981;"></i>
-            <span>Günün Öncelikli Görevleri</span>
+          <p class="ipucu">
+            Uzun metinler otomatik olarak parçalanıp sırayla çevrilir. Kişisel veya gizli bilgi yapıştırmayın —
+            metin çeviri servisine gönderilir.
+          </p>
+          <div class="cikti hidden" id="ciktiKutu">
+            <div class="cikti-bas">
+              <span id="ciktiBaslik">Çeviri</span>
+              <button id="btnKopyala">Kopyala</button>
+            </div>
+            <div class="cikti-metin" id="ciktiMetin"></div>
           </div>
         </div>
-        <ul class="todo-list" id="todoList"></ul>
-        <div class="todo-input-row">
-          <input type="text" class="todo-input" id="newTodoInput" placeholder="Yeni görev ekle..." onkeypress="handleTodoKey(event)">
-          <button class="todo-btn" onclick="addTodo()">Ekle</button>
+      </section>
+
+      <!-- GÖREVLER -->
+      <section class="panel">
+        <div class="panel-bas">
+          <i class="fa-solid fa-list-check" style="color:#10b981"></i>
+          <h3>Günün Görevleri</h3>
+          <span class="etiket" id="gorevSayi" style="background:rgba(0,102,204,.12);color:var(--blue)">0/0</span>
         </div>
-      </div>
-    </section>
+        <ul class="gorev-liste" id="gorevListe"></ul>
+        <div class="satir">
+          <input id="gorevInput" class="girdi" type="text" placeholder="Yeni görev ekle…" autocomplete="off">
+          <button class="btn btn-hayalet" id="gorevEkle" aria-label="Görev ekle"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="gorev-alt">
+          <span>Bu tarayıcıda saklanır</span>
+          <button id="gorevTemizle">Tamamlananları sil</button>
+        </div>
+      </section>
 
-  </main>
+      <!-- NOTLAR -->
+      <section class="panel">
+        <div class="panel-bas">
+          <i class="fa-solid fa-pen-to-square" style="color:#d97706"></i>
+          <h3>Masa Notları</h3>
+          <span class="etiket" style="background:rgba(16,185,129,.13)">Oto-kayıt</span>
+        </div>
+        <textarea id="notlar" class="girdi" rows="6" placeholder="Toplantı notu, telefon, hatırlatma…"></textarea>
+        <div class="not-alt">
+          <span class="kayit" id="notDurum"><i class="fa-solid fa-check"></i> Kaydedildi</span>
+          <span id="notSayac">0 karakter</span>
+        </div>
+        <div class="satir">
+          <button class="btn btn-hayalet btn-tam" id="notIndir"><i class="fa-solid fa-download"></i> .txt indir</button>
+          <button class="btn btn-hayalet" id="notSil" aria-label="Notları temizle"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      </section>
 
-  <!-- Alt Bilgi -->
-  <footer>
-    <p>6G Eğitim Genel Müdürlüğü © 2026 | Kurumsal Yönetim & İletişim Portalı</p>
-  </footer>
+    </aside>
+  </div>
+</main>
 
-  <script>
-    // Canlı Saat & Tarih
-    function updateClock() {
-      const now = new Date();
-      const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-      document.getElementById('currentDate').textContent = now.toLocaleDateString('tr-TR', options);
-      
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('currentTime').textContent = `${hours}:${minutes}`;
+<footer>
+  <div class="ic">
+    <span><b>6G Eğitim</b> · Genel Müdürlük Yönetim Portalı</span>
+    <span id="altBilgi">Kaynaklar dış sitelere açılır · Not ve görevler yalnızca bu tarayıcıda tutulur</span>
+  </div>
+</footer>
+
+<div id="toast"><i class="fa-solid fa-circle-info"></i><span id="toastMetin"></span></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     A. KATEGORİLER
+     Yeni kategori eklemek için buraya bir satır ekleyin.
+     ============================================================ */
+  const KATEGORILER = {
+    gunluk:   { ad: 'Günlük İşler',              ikon: 'fa-bolt',             renk: 'i-amber'  },
+    haber:    { ad: 'Haber & Basın',             ikon: 'fa-newspaper',        renk: 'i-red'    },
+    akademi:  { ad: 'Akademi & Araştırma',       ikon: 'fa-book-open-reader', renk: 'i-violet' },
+    politika: { ad: 'Politika & Rapor',          ikon: 'fa-scale-balanced',   renk: 'i-teal'   },
+    kuresel:  { ad: 'Küresel Eğitim & EdTech',   ikon: 'fa-globe',            renk: 'i-blue'   }
+  };
+
+  /* ============================================================
+     B. KAYNAKLAR
+     Yeni bir portal eklemek için aşağıdaki listeye bir nesne ekleyin:
+     { id:'tekil-ad', ad:'Görünen Ad', aciklama:'Kısa açıklama',
+       url:'https://...', kategori:'haber', ikon:'fa-...', renk:'i-blue',
+       etiket:'arama kelimeleri', yabanci:true }
+     'yabanci:true' → kart üzerinde TR (çeviri) düğmesi sürekli görünür.
+     ============================================================ */
+  const KAYNAKLAR = [
+
+    /* ---------- GÜNLÜK İŞLER ---------- */
+    { id:'k12net',   ad:'K12NET',            aciklama:'Okul bilgi sistemi',        url:'https://portal.k12net.com',    kategori:'gunluk', ikon:'fa-graduation-cap', renk:'i-blue',   etiket:'k12 okul öğrenci veli yoklama karne' },
+    { id:'mebbis',   ad:'MEBBİS',            aciklama:'Bakanlık bilgi sistemi',    url:'https://mebbis.meb.gov.tr',    kategori:'gunluk', ikon:'fa-id-card',        renk:'i-red',    etiket:'meb kişisel bilgi personel maaş' },
+    { id:'eba',      ad:'EBA',               aciklama:'Eğitim bilişim ağı',        url:'https://www.eba.gov.tr',       kategori:'gunluk', ikon:'fa-laptop',         renk:'i-violet', etiket:'eba içerik ders video' },
+    { id:'gmail',    ad:'Gmail',             aciklama:'Kurumsal e-posta',          url:'https://mail.google.com',      kategori:'gunluk', ikon:'fa-envelope',       renk:'i-red',    etiket:'mail posta e-posta' },
+    { id:'drive',    ad:'Google Drive',      aciklama:'Dosya ve arşiv deposu',     url:'https://drive.google.com',     kategori:'gunluk', ikon:'fa-hard-drive',     renk:'i-amber',  etiket:'bulut dosya arşiv' },
+    { id:'takvim',   ad:'Google Takvim',     aciklama:'Toplantı ve randevular',    url:'https://calendar.google.com',  kategori:'gunluk', ikon:'fa-calendar-days',  renk:'i-blue',   etiket:'takvim toplantı ajanda' },
+    { id:'edevlet',  ad:'e-Devlet',          aciklama:'Kamu hizmetleri kapısı',    url:'https://www.turkiye.gov.tr',   kategori:'gunluk', ikon:'fa-landmark-dome',  renk:'i-teal',   etiket:'devlet resmi belge başvuru' },
+    { id:'instagram',ad:'Instagram',         aciklama:'Kurumsal sosyal medya',     url:'https://www.instagram.com',    kategori:'gunluk', ikon:'fa-instagram',      renk:'i-pink',   etiket:'sosyal medya paylaşım' },
+    { id:'facebook', ad:'Facebook',          aciklama:'Topluluk ve duyuru',        url:'https://www.facebook.com',     kategori:'gunluk', ikon:'fa-facebook-f',     renk:'i-blue',   etiket:'sosyal medya topluluk' },
+    { id:'x',        ad:'X (Twitter)',       aciklama:'Gündem ve duyuru akışı',    url:'https://x.com',                kategori:'gunluk', ikon:'fa-x-twitter',      renk:'i-slate',  etiket:'sosyal medya gündem' },
+
+    /* ---------- HABER & BASIN ---------- */
+    { id:'mebhaber', ad:'MEB Haberler',      aciklama:'Bakanlık resmî duyuruları', url:'https://www.meb.gov.tr/haberler/', kategori:'haber', ikon:'fa-bullhorn',      renk:'i-red',    etiket:'meb duyuru genelge tebliğ resmi' },
+    { id:'aa',       ad:'Anadolu Ajansı',    aciklama:'Resmî haber ajansı',        url:'https://www.aa.com.tr/tr',     kategori:'haber', ikon:'fa-tower-broadcast',renk:'i-blue',   etiket:'aa ajans son dakika gündem' },
+    { id:'egitimajansi', ad:'Eğitim Ajansı', aciklama:'Eğitim odaklı haberler',    url:'https://www.egitimajansi.com', kategori:'haber', ikon:'fa-newspaper',      renk:'i-amber',  etiket:'eğitim haber öğretmen atama sınav' },
+    { id:'ntvegitim',ad:'NTV Eğitim',        aciklama:'Eğitim gündemi',            url:'https://www.ntv.com.tr/egitim',kategori:'haber', ikon:'fa-graduation-cap', renk:'i-red',    etiket:'ntv eğitim sınav üniversite' },
+    { id:'hurriyetegitim', ad:'Hürriyet Eğitim', aciklama:'Eğitim haberleri',      url:'https://www.hurriyet.com.tr/egitim/', kategori:'haber', ikon:'fa-newspaper', renk:'i-red', etiket:'hürriyet eğitim okul sınav' },
+    { id:'milliyetegitim', ad:'Milliyet Eğitim', aciklama:'Eğitim haberleri',      url:'https://www.milliyet.com.tr/egitim', kategori:'haber', ikon:'fa-newspaper', renk:'i-blue', etiket:'milliyet eğitim okul sınav' },
+    { id:'bbcturkce',ad:'BBC Türkçe',        aciklama:'Uluslararası haber (TR)',   url:'https://www.bbc.com/turkce',   kategori:'haber', ikon:'fa-globe',          renk:'i-red',    etiket:'bbc dünya haber' },
+    { id:'euronews', ad:'Euronews Türkçe',   aciklama:'Avrupa gündemi (TR)',       url:'https://tr.euronews.com',      kategori:'haber', ikon:'fa-globe',          renk:'i-blue',   etiket:'avrupa haber türkçe' },
+    { id:'dw',       ad:'DW Türkçe',         aciklama:'Almanya merkezli haber (TR)',url:'https://www.dw.com/tr',       kategori:'haber', ikon:'fa-globe',          renk:'i-slate',  etiket:'almanya haber türkçe' },
+    { id:'sabah',    ad:'Sabah',             aciklama:'Ulusal gazete',             url:'https://www.sabah.com.tr',     kategori:'haber', ikon:'fa-paper-plane',    renk:'i-red',    etiket:'gazete ulusal gündem' },
+    { id:'hurriyet', ad:'Hürriyet',          aciklama:'Ulusal gazete',             url:'https://www.hurriyet.com.tr',  kategori:'haber', ikon:'fa-h',              renk:'i-red',    etiket:'gazete ulusal manşet' },
+    { id:'posta',    ad:'Posta',             aciklama:'Ulusal gazete',             url:'https://www.posta.com.tr',     kategori:'haber', ikon:'fa-envelope-open-text', renk:'i-amber', etiket:'gazete ulusal' },
+    { id:'mansetler',ad:'Gazete Manşetleri', aciklama:'Tüm gazeteler bir arada',   url:'https://www.gazeteler.com',    kategori:'haber', ikon:'fa-layer-group',    renk:'i-slate',  etiket:'manşet birinci sayfa gazete' },
+    { id:'gumushane',ad:'Gümüşhane Haber',   aciklama:'Yerel basın ve gündem',     url:'https://www.gumushane.gen.tr', kategori:'haber', ikon:'fa-mountain-sun',   renk:'i-green',  etiket:'gümüşhane yerel haber' },
+
+    /* ---------- AKADEMİ & ARAŞTIRMA ---------- */
+    { id:'dergipark',ad:'DergiPark',         aciklama:'Hakemli dergi arşivi',      url:'https://dergipark.org.tr/tr/', kategori:'akademi', ikon:'fa-scroll',        renk:'i-pink',   etiket:'akademik makale dergi eğitim araştırma' },
+    { id:'scholar',  ad:'Google Akademik',   aciklama:'Makale ve atıf araması',    url:'https://scholar.google.com.tr',kategori:'akademi', ikon:'fa-graduation-cap', renk:'i-blue',   etiket:'makale atıf akademik arama', yabanci:true },
+    { id:'academia', ad:'Academia.edu',      aciklama:'Araştırmacı ağı',           url:'https://www.academia.edu',     kategori:'akademi', ikon:'fa-users-rectangle',renk:'i-slate',  etiket:'akademik paylaşım araştırmacı', yabanci:true },
+    { id:'researchgate', ad:'ResearchGate',  aciklama:'Yayın ve iş birliği ağı',   url:'https://www.researchgate.net', kategori:'akademi', ikon:'fa-flask',          renk:'i-teal',   etiket:'yayın araştırma bilim', yabanci:true },
+    { id:'eric',     ad:'ERIC',              aciklama:'ABD eğitim literatürü',     url:'https://eric.ed.gov',          kategori:'akademi', ikon:'fa-database',       renk:'i-indigo', etiket:'eric eğitim makale veritabanı', yabanci:true },
+    { id:'trdizin',  ad:'TR Dizin',          aciklama:'Ulusal atıf dizini',        url:'https://trdizin.gov.tr',       kategori:'akademi', ikon:'fa-list-check',     renk:'i-green',  etiket:'tr dizin ulusal makale' },
+    { id:'yoktez',   ad:'YÖK Tez Merkezi',   aciklama:'Lisansüstü tez arşivi',     url:'https://tez.yok.gov.tr',       kategori:'akademi', ikon:'fa-file-lines',     renk:'i-red',    etiket:'tez yüksek lisans doktora' },
+    { id:'yokakademik', ad:'YÖK Akademik',   aciklama:'Akademisyen profilleri',    url:'https://akademik.yok.gov.tr',  kategori:'akademi', ikon:'fa-user-graduate',  renk:'i-amber',  etiket:'akademisyen profil yök' },
+    { id:'tubitak',  ad:'TÜBİTAK',           aciklama:'Bilim ve proje destekleri', url:'https://www.tubitak.gov.tr',   kategori:'akademi', ikon:'fa-atom',           renk:'i-blue',   etiket:'tubitak proje bilim destek burs' },
+    { id:'semantic', ad:'Semantic Scholar',  aciklama:'Yapay zekâ destekli arama', url:'https://www.semanticscholar.org', kategori:'akademi', ikon:'fa-brain',      renk:'i-violet', etiket:'makale özet ai arama', yabanci:true },
+
+    /* ---------- POLİTİKA & RAPOR ---------- */
+    { id:'ttkb',     ad:'Talim ve Terbiye (TTKB)', aciklama:'Müfredat ve kurul kararları', url:'https://ttkb.meb.gov.tr', kategori:'politika', ikon:'fa-scale-balanced', renk:'i-violet', etiket:'ttkb müfredat ders kitabı program' },
+    { id:'mevzuat',  ad:'Mevzuat.gov.tr',    aciklama:'Kanun, yönetmelik, genelge',url:'https://www.mevzuat.gov.tr',   kategori:'politika', ikon:'fa-gavel',          renk:'i-slate',  etiket:'mevzuat kanun yönetmelik genelge' },
+    { id:'tedmem',   ad:'TEDMEM',            aciklama:'Eğitim raporları ve analiz',url:'https://tedmem.org',           kategori:'politika', ikon:'fa-chart-pie',      renk:'i-green',  etiket:'tedmem rapor analiz politika' },
+    { id:'erg',      ad:'Eğitim Reformu Girişimi', aciklama:'İzleme ve politika notları', url:'https://www.egitimreformugirisimi.org', kategori:'politika', ikon:'fa-compass-drafting', renk:'i-amber', etiket:'erg izleme rapor eşitlik' },
+    { id:'oecd',     ad:'OECD Education',    aciklama:'PISA ve karşılaştırmalı veri', url:'https://www.oecd.org/en/topics/education.html', kategori:'politika', ikon:'fa-chart-line', renk:'i-slate', etiket:'oecd pisa uluslararası veri', yabanci:true },
+    { id:'unesco',   ad:'UNESCO Education',  aciklama:'Küresel eğitim politikaları',url:'https://www.unesco.org/en/education', kategori:'politika', ikon:'fa-globe',    renk:'i-cyan',   etiket:'unesco küresel politika sürdürülebilir', yabanci:true },
+    { id:'worldbank',ad:'Dünya Bankası Eğitim', aciklama:'Kalkınma ve eğitim verisi',url:'https://www.worldbank.org/en/topic/education', kategori:'politika', ikon:'fa-building-columns', renk:'i-blue', etiket:'dünya bankası kalkınma veri', yabanci:true },
+    { id:'eurydice', ad:'Eurydice',          aciklama:'AB eğitim sistemleri',      url:'https://eurydice.eacea.ec.europa.eu', kategori:'politika', ikon:'fa-flag',     renk:'i-indigo', etiket:'ab avrupa eğitim sistemi karşılaştırma', yabanci:true },
+    { id:'cedefop',  ad:'CEDEFOP',           aciklama:'Mesleki eğitim ajansı',     url:'https://www.cedefop.europa.eu',kategori:'politika', ikon:'fa-briefcase',      renk:'i-teal',   etiket:'mesleki eğitim ab beceri', yabanci:true },
+
+    /* ---------- KÜRESEL EĞİTİM & EDTECH ---------- */
+    { id:'edsurge',  ad:'EdSurge',           aciklama:'Eğitim teknolojileri',      url:'https://www.edsurge.com',      kategori:'kuresel', ikon:'fa-laptop-code',    renk:'i-violet', etiket:'edtech yapay zeka teknoloji', yabanci:true },
+    { id:'edutopia', ad:'Edutopia',          aciklama:'Kanıta dayalı öğretim',     url:'https://www.edutopia.org',     kategori:'kuresel', ikon:'fa-lightbulb',      renk:'i-green',  etiket:'öğretim strateji sınıf pedagoji', yabanci:true },
+    { id:'edweek',   ad:'Education Week',    aciklama:'ABD eğitim gündemi',        url:'https://www.edweek.org',       kategori:'kuresel', ikon:'fa-newspaper',      renk:'i-blue',   etiket:'eğitim haber abd politika', yabanci:true },
+    { id:'tes',      ad:'TES Magazine',      aciklama:'İngiltere öğretmen dergisi',url:'https://www.tes.com/magazine', kategori:'kuresel', ikon:'fa-chalkboard-user',renk:'i-red',    etiket:'öğretmen dergi ingiltere', yabanci:true },
+    { id:'hechinger',ad:'Hechinger Report',  aciklama:'Derinlemesine eğitim gazeteciliği', url:'https://hechingerreport.org', kategori:'kuresel', ikon:'fa-magnifying-glass-chart', renk:'i-amber', etiket:'eğitim araştırma gazetecilik eşitlik', yabanci:true },
+    { id:'insidehighered', ad:'Inside Higher Ed', aciklama:'Yükseköğretim gündemi',url:'https://www.insidehighered.com',kategori:'kuresel', ikon:'fa-building-columns', renk:'i-indigo', etiket:'üniversite yükseköğretim', yabanci:true },
+    { id:'mitnews',  ad:'MIT News: Education', aciklama:'MIT eğitim araştırmaları',url:'https://news.mit.edu/topic/education', kategori:'kuresel', ikon:'fa-robot', renk:'i-slate', etiket:'mit araştırma bilim eğitim', yabanci:true },
+    { id:'brookings',ad:'Brookings Education', aciklama:'Politika araştırma merkezi',url:'https://www.brookings.edu/topic/education/', kategori:'kuresel', ikon:'fa-book', renk:'i-cyan', etiket:'brookings politika araştırma', yabanci:true },
+    { id:'iste',     ad:'ISTE',              aciklama:'Eğitimde teknoloji standartları', url:'https://iste.org',        kategori:'kuresel', ikon:'fa-plug',           renk:'i-teal',   etiket:'iste edtech standart öğretmen', yabanci:true }
+  ];
+
+  /* ============================================================
+     C. YARDIMCILAR
+     ============================================================ */
+  const $  = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+
+  const LS = {
+    tema: '6g_tema_v3',
+    notlar: '6g_notlar_v2',
+    gorevler: '6g_gorevler_v2',
+    tiklamalar: '6g_tiklamalar_v2',
+    sonCeviri: '6g_son_ceviri_v2'
+  };
+
+  function oku(anahtar, varsayilan) {
+    try {
+      const ham = localStorage.getItem(anahtar);
+      return ham === null ? varsayilan : JSON.parse(ham);
+    } catch (e) { return varsayilan; }
+  }
+  function yaz(anahtar, deger) {
+    try { localStorage.setItem(anahtar, JSON.stringify(deger)); } catch (e) {}
+  }
+
+  let toastZaman;
+  function toast(mesaj, tip) {
+    const kutu = $('#toast');
+    const ikon = kutu.querySelector('i');
+    const renk = tip === 'hata' ? '#fb7185' : tip === 'ok' ? '#34d399' : '#22d3ee';
+    ikon.className = 'fa-solid ' + (tip === 'hata' ? 'fa-circle-exclamation' : tip === 'ok' ? 'fa-circle-check' : 'fa-circle-info');
+    ikon.style.color = renk;
+    $('#toastMetin').textContent = mesaj;
+    kutu.classList.add('gorunur');
+    clearTimeout(toastZaman);
+    toastZaman = setTimeout(() => kutu.classList.remove('gorunur'), 3200);
+  }
+
+  function panoyaKopyala(metin) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(metin);
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    return new Promise((res, rej) => {
+      const t = document.createElement('textarea');
+      t.value = metin;
+      t.style.cssText = 'position:fixed;left:-9999px';
+      document.body.appendChild(t);
+      t.select();
+      try { document.execCommand('copy'); res(); } catch (e) { rej(e); }
+      document.body.removeChild(t);
+    });
+  }
 
-    // Kartlar Üzerinde Canlı Arama / Filtreleme
-    function filterCards() {
-      const query = document.getElementById('liveSearch').value.toLowerCase().trim();
-      const cards = document.querySelectorAll('.portal-card');
+  /* ============================================================
+     D. TEMA
+     ============================================================ */
+  // kaydet = true ise tercih hatırlanır (yalnızca kullanıcı düğmeye basınca)
+  function temaUygula(t, kaydet) {
+    document.documentElement.setAttribute('data-theme', t);
+    const i = $('#temaIkon');
+    i.className = t === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    if (kaydet) yaz(LS.tema, t);
+  }
+  // Varsayılan her zaman AÇIK (beyaz) tema. Koyu tema yalnızca düğmeyle seçilirse açılır.
+  function temaBaslat() {
+    const kayitli = oku(LS.tema, null);
+    temaUygula(kayitli === 'dark' ? 'dark' : 'light', false);
+  }
 
-      cards.forEach(card => {
-        const title = card.querySelector('.card-title').textContent.toLowerCase();
-        const desc = card.querySelector('.card-desc').textContent.toLowerCase();
-        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
-
-        if (title.includes(query) || desc.includes(query) || tags.includes(query)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+  /* ============================================================
+     E. SAAT
+     ============================================================ */
+  function saatBaslat() {
+    const tarihEl = $('#tarih');
+    const saatEl = $('#saat');
+    function guncelle() {
+      const n = new Date();
+      tarihEl.textContent = n.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', weekday: 'long' });
+      saatEl.textContent = n.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
     }
+    guncelle();
+    setInterval(guncelle, 15000);
+  }
 
-    // Not Defteri (LocalStorage)
-    function saveNotes() {
-      const text = document.getElementById('directorNotes').value;
-      localStorage.setItem('6g_director_quick_notes', text);
-      const status = document.getElementById('saveStatus');
-      status.style.display = 'inline-block';
-      setTimeout(() => { status.style.display = 'none'; }, 1500);
+  /* ============================================================
+     F. KARTLARIN ÇİZİMİ
+     ============================================================ */
+  let aktifKategori = 'hepsi';
+  let aramaMetni = '';
+
+  function kartHTML(k) {
+    return '' +
+      '<div class="kart-sar" data-yabanci="' + (k.yabanci ? 1 : 0) + '">' +
+        '<a class="kart" href="' + k.url + '" target="_blank" rel="noopener noreferrer" data-id="' + k.id + '">' +
+          '<div class="kart-ikon ' + k.renk + '"><i class="fa-solid ' + k.ikon + '"></i></div>' +
+          '<div class="kart-govde">' +
+            '<div class="kart-ad">' + k.ad + '</div>' +
+            '<div class="kart-ac">' + k.aciklama + '</div>' +
+          '</div>' +
+        '</a>' +
+        '<button class="tr-btn" data-url="' + k.url + '" title="Türkçe çeviriyle aç" aria-label="Türkçe çeviriyle aç">TR</button>' +
+      '</div>';
+  }
+
+  function grupHTML(baslik, ikon, renk, liste) {
+    return '' +
+      '<section class="grup">' +
+        '<div class="grup-bas">' +
+          '<div class="grup-ikon ' + renk + '"><i class="fa-solid ' + ikon + '"></i></div>' +
+          '<h2>' + baslik + '</h2>' +
+          '<span class="sayi">' + liste.length + '</span>' +
+        '</div>' +
+        '<div class="izgara">' + liste.map(kartHTML).join('') + '</div>' +
+      '</section>';
+  }
+
+  function eslesiyor(k, q) {
+    return (k.ad + ' ' + k.aciklama + ' ' + (k.etiket || '') + ' ' + k.kategori)
+      .toLocaleLowerCase('tr') .indexOf(q) > -1;
+  }
+
+  function sikKullanilanlar() {
+    const tik = oku(LS.tiklamalar, {});
+    const toplam = Object.keys(tik).reduce((a, b) => a + tik[b], 0);
+    if (toplam < 3) return [];
+    return Object.keys(tik)
+      .sort((a, b) => tik[b] - tik[a])
+      .slice(0, 6)
+      .map(id => KAYNAKLAR.find(k => k.id === id))
+      .filter(Boolean);
+  }
+
+  function ciz() {
+    const q = aramaMetni.toLocaleLowerCase('tr').trim();
+    const kap = $('#icerik');
+    let html = '';
+
+    if (!q && aktifKategori === 'hepsi') {
+      const sk = sikKullanilanlar();
+      if (sk.length) html += grupHTML('Sık Kullanılanlar', 'fa-star', 'i-amber', sk);
     }
 
-    function loadNotes() {
-      const saved = localStorage.getItem('6g_director_quick_notes');
-      if (saved) {
-        document.getElementById('directorNotes').value = saved;
+    Object.keys(KATEGORILER).forEach(function (anahtar) {
+      if (aktifKategori !== 'hepsi' && aktifKategori !== anahtar) return;
+      const meta = KATEGORILER[anahtar];
+      const liste = KAYNAKLAR.filter(k => k.kategori === anahtar && (!q || eslesiyor(k, q)));
+      if (!liste.length) return;
+      html += grupHTML(meta.ad, meta.ikon, meta.renk, liste);
+    });
+
+    if (!html) {
+      html = '<div class="bos-durum"><i class="fa-solid fa-magnifying-glass"></i>' +
+             'Aramanızla eşleşen kaynak bulunamadı.<br>Farklı bir kelime deneyin veya aramayı temizleyin.</div>';
+    }
+    kap.innerHTML = html;
+  }
+
+  function cipleriCiz() {
+    const kap = $('#cipler');
+    let html = '<button class="cip aktif" data-kategori="hepsi">Tümü <span style="opacity:.6">(' + KAYNAKLAR.length + ')</span></button>';
+    Object.keys(KATEGORILER).forEach(function (anahtar) {
+      const m = KATEGORILER[anahtar];
+      const sayi = KAYNAKLAR.filter(k => k.kategori === anahtar).length;
+      html += '<button class="cip" data-kategori="' + anahtar + '">' +
+                '<i class="fa-solid ' + m.ikon + '" style="font-size:10px;opacity:.75;margin-right:5px"></i>' +
+                m.ad + ' <span style="opacity:.6">(' + sayi + ')</span>' +
+              '</button>';
+    });
+    kap.innerHTML = html;
+  }
+
+  /* ============================================================
+     G. ÇEVİRİ MOTORU (API anahtarı gerekmez)
+     ============================================================ */
+
+  // 1) Sayfayı çeviri vekili (*.translate.goog) üzerinden aç — API anahtarı gerekmez
+  function ceviriAdresi(url, hedef) {
+    try {
+      const u = new URL(url);
+      if (u.hostname.indexOf('.translate.goog') > -1) return url;
+      const host = u.hostname.replace(/\./g, '-');
+      const p = new URLSearchParams(u.search);
+      p.set('_x_tr_sl', 'auto');
+      p.set('_x_tr_tl', hedef);
+      p.set('_x_tr_hl', 'tr');
+      return 'https://' + host + '.translate.goog' + u.pathname + '?' + p.toString();
+    } catch (e) { return null; }
+  }
+
+  // 2) Google Çeviri sayfası (etkileşimli yedek yöntem)
+  function googleLink(url, hedef) {
+    return 'https://translate.google.com/?sl=auto&tl=' + hedef + '&text=' + encodeURIComponent(url);
+  }
+
+  function urlDuzelt(ham) {
+    let s = (ham || '').trim();
+    if (!s) return null;
+    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
+    try { new URL(s); return s; } catch (e) { return null; }
+  }
+
+  function linkAc(url, hedef, servis) {
+    const temiz = urlDuzelt(url);
+    if (!temiz) { toast('Geçerli bir adres girin (örn. https://www.oecd.org)', 'hata'); return; }
+    const hedef2 = hedef || $('#linkHedef').value;
+    const ceviri = servis === 'google' ? googleLink(temiz, hedef2) : (ceviriAdresi(temiz, hedef2) || googleLink(temiz, hedef2));
+    window.open(ceviri, '_blank', 'noopener');
+    sonCeviriEkle(temiz);
+  }
+
+  function sonCeviriEkle(url) {
+    let liste = oku(LS.sonCeviri, []);
+    liste = liste.filter(u => u !== url);
+    liste.unshift(url);
+    yaz(LS.sonCeviri, liste.slice(0, 5));
+    sonCevirileriCiz();
+  }
+
+  function sonCevirileriCiz() {
+    const kap = $('#sonLinkler');
+    if (!kap) return;
+    const liste = oku(LS.sonCeviri, []);
+    kap.innerHTML = liste.map(function (u) {
+      let etiket = u;
+      try { etiket = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {}
+      return '<button class="mini-cip" data-url="' + u + '" title="' + u + '">' +
+             '<i class="fa-solid fa-rotate-left" style="font-size:8px;margin-right:4px"></i>' + etiket + '</button>';
+    }).join('');
+  }
+
+  // 3) Metin çevirisi — ücretsiz uç nokta, anahtar yok
+  const CEVIRI_UC = 'https://translate.googleapis.com/translate_a/single';
+  const CEVIRI_UC2 = 'https://clients5.google.com/translate_a/t';
+
+  function parcala(metin, boyut) {
+    boyut = boyut || 1200;
+    const cumleler = metin.match(/[^.!?\n]+[.!?]*\s*|\n+/g) || [metin];
+    const parcalar = [];
+    let tampon = '';
+    cumleler.forEach(function (c) {
+      if ((tampon + c).length > boyut && tampon) { parcalar.push(tampon); tampon = c; }
+      else { tampon += c; }
+      // Tek başına aşırı uzun cümle: zorla böl
+      while (tampon.length > boyut * 1.6) { parcalar.push(tampon.slice(0, boyut)); tampon = tampon.slice(boyut); }
+    });
+    if (tampon.trim()) parcalar.push(tampon);
+    return parcalar.length ? parcalar : [metin];
+  }
+
+  function cevapCoz(d) {
+    if (!d) return '';
+    if (d.sentences) return d.sentences.map(s => s.trans || '').join('');
+    if (Array.isArray(d[0])) return d[0].map(p => (Array.isArray(p) ? p[0] : '') || '').join('');
+    if (Array.isArray(d)) return d.map(p => (Array.isArray(p) ? p[0] : p) || '').join('');
+    return '';
+  }
+
+  async function tekParcaCevir(metin, hedef) {
+    const q = encodeURIComponent(metin);
+    // 1. uç nokta
+    try {
+      const r = await fetch(CEVIRI_UC + '?client=gtx&dj=1&dt=t&sl=auto&tl=' + hedef + '&q=' + q);
+      if (r.ok) {
+        const d = await r.json();
+        const t = cevapCoz(d);
+        if (t) return t;
       }
+    } catch (e) { /* yedeğe geç */ }
+
+    // 2. uç nokta
+    const r2 = await fetch(CEVIRI_UC2 + '?client=dict-chrome-ex&sl=auto&tl=' + hedef + '&q=' + q);
+    if (!r2.ok) throw new Error('Çeviri servisi yanıt vermedi (' + r2.status + ')');
+    const d2 = await r2.json();
+    const t2 = cevapCoz(d2);
+    if (!t2) throw new Error('Çeviri sonucu okunamadı');
+    return t2;
+  }
+
+  async function metinCevir(metin, hedef, ilerleme) {
+    const parcalar = parcala(metin);
+    const sonuc = [];
+    for (let i = 0; i < parcalar.length; i++) {
+      if (ilerleme) ilerleme(i + 1, parcalar.length);
+      sonuc.push(await tekParcaCevir(parcalar[i], hedef));
+      if (i < parcalar.length - 1) await new Promise(r => setTimeout(r, 300));
     }
+    return sonuc.join('\n');
+  }
 
-    // Günlük Görevler (LocalStorage)
-    let todos = JSON.parse(localStorage.getItem('6g_portal_todos') || '[]');
+  /* ============================================================
+     H. ÇEVİRİ ARAYÜZÜ
+     ============================================================ */
+  function sekmeleriKur() {
+    $$('.sekme').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        $$('.sekme').forEach(b => b.classList.remove('aktif'));
+        btn.classList.add('aktif');
+        const hedef = btn.getAttribute('data-sekme');
+        $('#sekme-link').classList.toggle('hidden', hedef !== 'link');
+        $('#sekme-metin').classList.toggle('hidden', hedef !== 'metin');
+      });
+    });
+  }
 
-    if (todos.length === 0) {
-      todos = [
-        { text: 'MEB & Tebliğler Dergisi duyurularını kontrol et', done: false },
-        { text: 'K12NET günlük devam ve yoklama raporunu incele', done: false }
+  function ciktiGoster(baslik, metin, hata) {
+    $('#ciktiKutu').classList.remove('hidden');
+    $('#ciktiBaslik').textContent = baslik;
+    const el = $('#ciktiMetin');
+    el.textContent = metin;
+    el.classList.toggle('hata', !!hata);
+  }
+
+  async function metinCevirTikla() {
+    const metin = $('#metinInput').value.trim();
+    const hedef = $('#metinHedef').value;
+    if (!metin) { toast('Önce çevrilecek metni yapıştırın.', 'hata'); return; }
+    if (metin.length > 20000) { toast('Metin çok uzun (en fazla 20.000 karakter).', 'hata'); return; }
+
+    const btn = $('#btnMetinCevir');
+    const eskiHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Çevriliyor…';
+    ciktiGoster('Çevriliyor…', 'Metin çeviri servisine gönderiliyor, lütfen bekleyin…', false);
+
+    try {
+      const sonuc = await metinCevir(metin, hedef, function (i, t) {
+        if (t > 1) ciktiGoster('Çevriliyor… (' + i + '/' + t + ')', 'Bölüm ' + i + ' / ' + t + ' çevriliyor…', false);
+      });
+      const saat = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+      ciktiGoster(hedefAdi(hedef) + ' çevirisi · ' + saat, sonuc, false);
+      toast('Çeviri tamamlandı.', 'ok');
+    } catch (err) {
+      ciktiGoster('Çeviri yapılamadı',
+        'Bağlantı kurulamadı: ' + (err.message || 'bilinmeyen hata') + '\n\n' +
+        'Bu durum genelde ağ kısıtlaması veya servis limitinden kaynaklanır. ' +
+        'Metni kopyalayıp Google Çeviri sayfasında açabilirsiniz.', true);
+      toast('Çeviri servisine ulaşılamadı.', 'hata');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = eskiHTML;
+    }
+  }
+
+  function hedefAdi(kod) {
+    return { tr: 'Türkçe', en: 'İngilizce', de: 'Almanca', fr: 'Fransızca', ar: 'Arapça' }[kod] || kod.toUpperCase();
+  }
+
+  /* ============================================================
+     I. GÖREVLER
+     ============================================================ */
+  let gorevler = [];
+
+  function gorevYukle() {
+    gorevler = oku(LS.gorevler, null);
+    if (!Array.isArray(gorevler)) {
+      gorevler = [
+        { t: 'MEB ve Tebliğler Dergisi duyurularını kontrol et', d: false },
+        { t: 'K12NET günlük devam raporunu incele', d: false }
       ];
     }
+    gorevCiz();
+  }
 
-    function renderTodos() {
-      const list = document.getElementById('todoList');
-      list.innerHTML = '';
-      todos.forEach((todo, index) => {
-        const li = document.createElement('li');
-        li.className = 'todo-item';
-        li.innerHTML = `
-          <input type="checkbox" ${todo.done ? 'checked' : ''} onchange="toggleTodo(${index})">
-          <span style="flex:1; text-decoration: ${todo.done ? 'line-through' : 'none'}; color: ${todo.done ? '#94a3b8' : 'inherit'};">${escapeHtml(todo.text)}</span>
-          <i class="fa-solid fa-xmark" style="color:#cbd5e1; cursor:pointer; font-size:12px;" onclick="deleteTodo(${index})"></i>
-        `;
-        list.appendChild(li);
-      });
-      localStorage.setItem('6g_portal_todos', JSON.stringify(todos));
+  function gorevKaydet() { yaz(LS.gorevler, gorevler); gorevCiz(); }
+
+  function gorevCiz() {
+    const kap = $('#gorevListe');
+    const tamam = gorevler.filter(g => g.d).length;
+    $('#gorevSayi').textContent = tamam + '/' + gorevler.length;
+
+    if (!gorevler.length) {
+      kap.innerHTML = '<li class="gorev-bos">Bekleyen görev yok.</li>';
+      return;
     }
+    kap.innerHTML = gorevler.map(function (g, i) {
+      return '<li class="gorev ' + (g.d ? 'tamam' : '') + '">' +
+               '<input type="checkbox" data-i="' + i + '" ' + (g.d ? 'checked' : '') + ' aria-label="Tamamlandı">' +
+               '<span>' + kacir(g.t) + '</span>' +
+               '<button class="sil" data-sil="' + i + '" aria-label="Sil"><i class="fa-solid fa-xmark"></i></button>' +
+             '</li>';
+    }).join('');
+  }
 
-    function addTodo() {
-      const input = document.getElementById('newTodoInput');
-      const val = input.value.trim();
-      if (val) {
-        todos.push({ text: val, done: false });
-        input.value = '';
-        renderTodos();
-      }
-    }
-
-    function handleTodoKey(e) {
-      if (e.key === 'Enter') addTodo();
-    }
-
-    function toggleTodo(index) {
-      todos[index].done = !todos[index].done;
-      renderTodos();
-    }
-
-    function deleteTodo(index) {
-      todos.splice(index, 1);
-      renderTodos();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // Sayfa Yüklendiğinde
-    window.addEventListener('DOMContentLoaded', () => {
-      loadNotes();
-      renderTodos();
+  function kacir(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
-  </script>
+  }
+
+  function gorevEkle() {
+    const input = $('#gorevInput');
+    const deger = input.value.trim();
+    if (!deger) return;
+    gorevler.push({ t: deger, d: false });
+    input.value = '';
+    gorevKaydet();
+  }
+
+  /* ============================================================
+     J. NOTLAR
+     ============================================================ */
+  let notZaman;
+
+  function notYukle() {
+    const el = $('#notlar');
+    el.value = oku(LS.notlar, '');
+    notSayacGuncelle();
+  }
+
+  function notSayacGuncelle() {
+    const uzunluk = $('#notlar').value.length;
+    $('#notSayac').textContent = uzunluk + ' karakter';
+  }
+
+  function notKaydet() {
+    yaz(LS.notlar, $('#notlar').value);
+    const d = $('#notDurum');
+    d.classList.add('gorunur');
+    clearTimeout(notZaman);
+    notZaman = setTimeout(() => d.classList.remove('gorunur'), 1600);
+    notSayacGuncelle();
+  }
+
+  /* ============================================================
+     K. OLAY DİNLEYİCİLERİ
+     ============================================================ */
+  function olaylariKur() {
+    // Tema
+    $('#temaBtn').addEventListener('click', function () {
+      const yeni = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      temaUygula(yeni, true);
+      toast(yeni === 'dark' ? 'Koyu tema açıldı.' : 'Beyaz tema açıldı.', 'bilgi');
+    });
+
+    // Çeviri paneline git
+    $('#ceviriGit').addEventListener('click', function () {
+      $('#ceviri').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => $('#linkInput').focus(), 400);
+    });
+
+    // Kategori çipleri
+    $('#cipler').addEventListener('click', function (e) {
+      const btn = e.target.closest('.cip');
+      if (!btn) return;
+      $$('.cip').forEach(b => b.classList.remove('aktif'));
+      btn.classList.add('aktif');
+      aktifKategori = btn.getAttribute('data-kategori');
+      ciz();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Arama
+    const arama = $('#aramaInput');
+    arama.addEventListener('input', function () {
+      aramaMetni = arama.value;
+      ciz();
+    });
+
+    // Kart tıklama sayacı + TR düğmesi
+    $('#icerik').addEventListener('click', function (e) {
+      const trBtn = e.target.closest('.tr-btn');
+      if (trBtn) {
+        e.preventDefault();
+        linkAc(trBtn.getAttribute('data-url'), 'tr', 'vekil');
+        return;
+      }
+      const kart = e.target.closest('a.kart');
+      if (kart) {
+        const id = kart.getAttribute('data-id');
+        const tik = oku(LS.tiklamalar, {});
+        tik[id] = (tik[id] || 0) + 1;
+        yaz(LS.tiklamalar, tik);
+      }
+    });
+
+    // Çeviri: bağlantı
+    $('#btnLinkCevir').addEventListener('click', function () {
+      linkAc($('#linkInput').value, $('#linkHedef').value, 'vekil');
+    });
+    $('#linkInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); linkAc(this.value, $('#linkHedef').value, 'vekil'); }
+    });
+    $('#linkGoogle').addEventListener('click', function (e) {
+      e.preventDefault();
+      linkAc($('#linkInput').value, $('#linkHedef').value, 'google');
+    });
+    $('#sonLinkler').addEventListener('click', function (e) {
+      const btn = e.target.closest('.mini-cip');
+      if (!btn) return;
+      $('#linkInput').value = btn.getAttribute('data-url');
+      linkAc(btn.getAttribute('data-url'), $('#linkHedef').value, 'vekil');
+    });
+
+    // Çeviri: metin
+    $('#btnMetinCevir').addEventListener('click', metinCevirTikla);
+    $('#btnKopyala').addEventListener('click', function () {
+      panoyaKopyala($('#ciktiMetin').textContent)
+        .then(() => toast('Çeviri panoya kopyalandı.', 'ok'))
+        .catch(() => toast('Kopyalanamadı.', 'hata'));
+    });
+    $('#metinInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); metinCevirTikla(); }
+    });
+
+    // Görevler
+    $('#gorevEkle').addEventListener('click', gorevEkle);
+    $('#gorevInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); gorevEkle(); }
+    });
+    $('#gorevListe').addEventListener('click', function (e) {
+      const kutu = e.target.closest('input[type="checkbox"]');
+      if (kutu) {
+        const i = +kutu.getAttribute('data-i');
+        gorevler[i].d = !gorevler[i].d;
+        gorevKaydet();
+        return;
+      }
+      const sil = e.target.closest('[data-sil]');
+      if (sil) {
+        gorevler.splice(+sil.getAttribute('data-sil'), 1);
+        gorevKaydet();
+      }
+    });
+    $('#gorevTemizle').addEventListener('click', function () {
+      const once = gorevler.length;
+      gorevler = gorevler.filter(g => !g.d);
+      if (gorevler.length === once) { toast('Tamamlanmış görev yok.', 'bilgi'); return; }
+      gorevKaydet();
+      toast('Tamamlanan görevler silindi.', 'ok');
+    });
+
+    // Notlar
+    $('#notlar').addEventListener('input', function () {
+      clearTimeout(notZaman);
+      notZaman = setTimeout(notKaydet, 600);
+      notSayacGuncelle();
+    });
+    $('#notSil').addEventListener('click', function () {
+      if (!confirm('Tüm notlar silinsin mi?')) return;
+      $('#notlar').value = '';
+      notKaydet();
+      toast('Notlar temizlendi.', 'bilgi');
+    });
+    $('#notIndir').addEventListener('click', function () {
+      const icerik = $('#notlar').value;
+      if (!icerik.trim()) { toast('İndirilecek not yok.', 'hata'); return; }
+      const blob = new Blob([icerik], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '6g-notlar-' + new Date().toISOString().slice(0, 10) + '.txt';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      toast('Notlar indirildi.', 'ok');
+    });
+
+    // Klavye kısayolları
+    document.addEventListener('keydown', function (e) {
+      const etkin = document.activeElement;
+      const yaziyor = etkin && (etkin.tagName === 'INPUT' || etkin.tagName === 'TEXTAREA' || etkin.isContentEditable);
+      if (e.key === '/' && !yaziyor) {
+        e.preventDefault();
+        arama.focus();
+      }
+      if (e.key === 'Escape' && document.activeElement === arama) {
+        arama.value = '';
+        aramaMetni = '';
+        ciz();
+        arama.blur();
+      }
+    });
+  }
+
+  /* ============================================================
+     L. BAŞLAT
+     ============================================================ */
+  function baslat() {
+    temaBaslat();
+    saatBaslat();
+    cipleriCiz();
+    ciz();
+    sekmeleriKur();
+    sonCevirileriCiz();
+    gorevYukle();
+    notYukle();
+    olaylariKur();
+    $('#altBilgi').textContent =
+      KAYNAKLAR.length + ' kaynak · Not ve görevler yalnızca bu tarayıcıda tutulur';
+  }
+
+  document.addEventListener('DOMContentLoaded', baslat);
+})();
+</script>
 </body>
 </html>
